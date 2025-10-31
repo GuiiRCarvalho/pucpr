@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guilherme Reis Carvalho - Engenharia de Software</title>
+    <style>
+        /* --- ESTILOS GERAIS E MINIMALISTAS --- */
+        :root {
+            --cor-principal: #1a237e;
+            --cor-texto: #343a40;
+            --cor-fundo: #ffffff;
+            --cor-fundo-sutil: #f8f9fa;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Roboto', 'Helvetica Neue', system-ui, -apple-system, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--cor-fundo);
+            color: var(--cor-texto);
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* --- NAVEGAÇÃO ELEGANTE --- */
+        .navbar {
+            background-color: var(--cor-fundo);
+            padding: 20px 0;
+            border-bottom: 1px solid #dee2e6;
+        }
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .nav-brand {
+            font-size: 1.2em;
+            font-weight: 600;
+            color: var(--cor-texto);
+        }
+        .nav-menu a {
+            color: #6c757d;
+            margin-left: 25px;
+            font-weight: 500;
+            transition: color 0.2s ease;
+        }
+        .nav-menu a:hover {
+            color: var(--cor-principal);
+            text-decoration: none;
+        }
+        .nav-menu a.active {
+            color: var(--cor-principal);
+            font-weight: 700;
+        }
+        
+        /* --- NOVA SEÇÃO DE HERÓI (PRINCIPAL) --- */
+        .hero {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 80vh; /* Ocupa boa parte da tela */
+            padding: 60px 0;
+        }
+        .hero-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 4rem;
+        }
+        .hero-content {
+            flex: 1;
+        }
+        .hero-image {
+            flex-basis: 300px; /* Tamanho base da imagem */
+            text-align: center;
+        }
+      .profile-image {
+            width: 280px;
+            height: 280px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid var(--cor-fundo-sutil);
+            
+            /* ADICIONE A LINHA ABAIXO E TESTE OS VALORES */
+            object-position: center 25%; /* Exemplo: Desliza a imagem para cima */
+
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem; /* Nome bem destacado */
+            color: var(--cor-principal);
+            margin: 0;
+            line-height: 1.1;
+        }
+        .hero-content .subtitle {
+            font-size: 1.2rem;
+            color: #6c757d;
+            margin: 1rem 0 1.5rem 0;
+        }
+        .hero-content p {
+            font-size: 1.1rem;
+            max-width: 500px; /* Limita a largura do texto */
+        }
+
+        /* --- BOTÃO DE PROJETOS REDESENHADO --- */
+        .cta-link {
+            display: inline-block;
+            margin-top: 2rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--cor-principal);
+            text-decoration: none;
+            padding: 10px 0;
+            border-bottom: 2px solid transparent;
+            transition: border-color 0.3s ease;
+        }
+        .cta-link:hover {
+            border-bottom-color: var(--cor-principal);
+        }
+
+        /* --- SEÇÃO DE HABILIDADES (MAIS LIMPA) --- */
+        .skills-section {
+            text-align: center;
+            padding: 60px 0;
+            background-color: var(--cor-fundo-sutil);
+        }
+        .skills-section h2 {
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #6c757d;
+            margin-bottom: 2rem;
+        }
+        .skills-list {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+
+        /* --- RODAPÉ --- */
+        .footer {
+            text-align: center;
+            padding: 40px 20px;
+            background-color: #343a40;
+            color: #adb5bd;
+        }
+        .footer h2 {
+            color: #fff;
+        }
+        .footer .contact-links {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 10px;
+        }
+        .footer a {
+            color: #fff;
+            font-weight: bold;
+        }
+
+        /* --- AJUSTE PARA CELULARES --- */
+        @media (max-width: 768px) {
+            .hero-container {
+                flex-direction: column-reverse; /* Imagem fica em cima do texto */
+                text-align: center;
+                gap: 2rem;
+            }
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+            .hero-content p {
+                max-width: 100%;
+            }
+            .profile-image {
+                width: 200px;
+                height: 200px;
+            }
+            .nav-container {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="container nav-container">
+            <a href="index.html" class="nav-brand">Guilherme Reis Carvalho</a>
+            <div class="nav-menu">
+                <a href="index.html" class="active">Início</a>
+                <a href="projetos.html">Projetos</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="hero">
+        <div class="container hero-container">
+            <div class="hero-content">
+                <h1>Olá, eu sou o Guilherme Reis.</h1>
+                <p class="subtitle">Desenvolvedor e estudante de Engenharia de Software.</p>
+                <p>
+                    Uso a disciplina e o foco estratégico que aprendi em 10 anos como atleta para construir soluções de software criativas e de alta performance.
+                </p>
+                <a href="projetos.html" class="cta-link">Conheça meus projetos &rarr;</a>
+            </div>
+            <div class="hero-image">
+                <img src="fotos/foto2.jpeg" alt="Foto de Perfil de Guilherme Reis Carvalho" class="profile-image">
+            </div>
+        </div>
+    </main>
+
+    <section class="skills-section">
+        <div class="container">
+            <h2>Algumas das minhas habilidades</h2>
+            <ul class="skills-list">
+                <li>HTML & CSS</li>
+                <li>JavaScript</li>
+                <li>SQL</li>
+                <li>Python</li>
+                <li>Java</li>
+                <li>Git & GitHub</li>
+            </ul>
+        </div>
+    </section>
+
+    <footer id="contato" class="footer">
+        <h2>Entre em Contato</h2>
+        <p>Estou disponível para novos projetos e oportunidades.</p>
+        <p><strong>guiestudos2005@gmail.com</strong></p>
+        <ul class="contact-links">
+            <li><a href="https://www.linkedin.com/in/guilherme-reis-carvalho-697899322/" target="_blank">LinkedIn</a></li>
+            <li><a href="https://github.com/GuiiRCarvalho" target="_blank">GitHub</a></li>
+        </ul>
+    </footer>
+
+</body>
+</html>

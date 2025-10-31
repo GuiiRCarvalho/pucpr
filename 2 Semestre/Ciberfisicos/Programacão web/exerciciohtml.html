@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil Pessoal</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 0;
+        }
+        header {
+            background-color: red;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            font-size: 24px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 2px 2px 10px rgba(0,0,0,0.1);
+        }
+        label {
+            font-weight: bold;
+            display: block;
+            margin-top: 10px;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <header>PGWEB1</header>
+    <div class="container">
+        <label for="nome">Nome:</label>
+        <input type="text" id="nome" name="nome" placeholder="Vinicius Trevisan">
+        
+        <label>Linguagens já utilizadas:</label>
+        <ol>
+            <li><input type="text" placeholder="Phyton"></li>
+            <li><input type="text" placeholder="HTML"></li>
+            <li><input type="text" placeholder="CSS"></li>
+        </ol>
+        
+        <label for="curso">Meu Curso:</label>
+        <input type="text" id="curso" name="curso" placeholder="BES">
+        
+        <label for="filmes-series">Filmes e Séries Favoritos:</label>
+        <ol>
+            <li><input type="text" placeholder="Interestelar"></li>
+            <li><input type="text" placeholder="Breaking Bad "></li>
+    </div>
+</body>
+</html>

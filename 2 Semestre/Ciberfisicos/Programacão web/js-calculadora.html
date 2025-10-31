@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
+        .calculadora {
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        .visor {
+            width: 100%;
+            height: 50px;
+            font-size: 36px;
+            text-align: right;
+            padding: 10px;
+            border: 5px solid grey;
+            margin-bottom: 10px;
+        }
+        .botoes {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 5px;
+        }
+        button {
+            width: 60px;
+            height: 60px;
+            font-size: 20px;
+            border-radius: 10px;
+            border: none;
+            cursor: pointer;
+        }
+        .numero {
+            background-color: purple;
+            color: white;
+        }
+        .operador {
+            background-color: yellow;
+        }
+        .limpar {
+            background-color: red;
+            color: white;
+        }
+        .igual {
+            background-color: yellow;
+        }
+        button:hover {
+            background-color: lightgray;
+        }
+    </style>
+</head>
+<body>
+    <div class="calculadora">
+        <div class="visor" id="visor">0</div>
+        <div class="botoes">
+            <button class="numero" onclick="adicionarNumero('7')">7</button>
+            <button class="numero" onclick="adicionarNumero('8')">8</button>
+            <button class="numero" onclick="adicionarNumero('9')">9</button>
+            <button class="operador" onclick="adicionarOperador('/')">/</button>
+            <button class="numero" onclick="adicionarNumero('4')">4</button>
+            <button class="numero" onclick="adicionarNumero('5')">5</button>
+            <button class="numero" onclick="adicionarNumero('6')">6</button>
+            <button class="operador" onclick="adicionarOperador('*')">*</button>
+            <button class="numero" onclick="adicionarNumero('1')">1</button>
+            <button class="numero" onclick="adicionarNumero('2')">2</button>
+            <button class="numero" onclick="adicionarNumero('3')">3</button>
+            <button class="operador" onclick="adicionarOperador('-')">-</button>
+            <button class="numero" onclick="adicionarNumero('0')">0</button>
+            <button class="limpar" onclick="limpar()">CA</button>
+            <button class="igual" onclick="calcular()">=</button>
+            <button class="operador" onclick="adicionarOperador('+')">+</button>
+        </div>
+    </div>
+
+    <script>
+        let expressao = "";
+        
+        function adicionarNumero(numero) {
+            expressao += numero;
+            atualizarVisor();
+        }
+        
+        function adicionarOperador(operador) {
+            expressao += " " + operador + " ";
+            atualizarVisor();
+        }
+        
+        function calcular() {
+            try {
+                expressao = eval(expressao);
+                atualizarVisor();
+            } catch (e) {
+                alert("Expressão inválida");
+            }
+        }
+        
+        function limpar() {
+            expressao = "";
+            atualizarVisor();
+        }
+        
+        function atualizarVisor() {
+            document.getElementById("visor").innerText = expressao;
+        }
+    </script>
+</body>
+</html>

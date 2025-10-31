@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+            flex-direction: column;
+            padding: 50px 0;
+        }
+        .calculator {
+            background: #fff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        td {
+            padding: 5px;
+            text-align: center;
+        }
+        input {
+            width: 60px;
+            height: 30px;
+            text-align: center;
+            font-size: 14px;
+        }
+        .operator {
+            width: 37px;
+            height: 37px;
+            background: #EE5000;
+            color: white;
+            font-size: 18px;
+            border: none;
+            cursor: pointer;
+        }
+        .clear {
+            width: 50px;
+            height: 37px;
+            background: #FF8000;
+            color: white;
+            font-size: 10px;
+            border: none;
+            cursor: pointer;
+        }
+        .operator:hover {
+            background: #a53701;
+        }
+        .clear:hover {
+            background: #a55301
+        }
+        .calculator2 {
+            background: #ccc;
+            padding: 10px;
+            box-shadow: 5px 5px 10px grey;
+            text-align: center;
+            display: inline-block;
+            border: 5px solid grey;
+        }
+        .display {
+            width: 220px;
+            height: 50px;
+            font-size: 36px;
+            text-align: right;
+            padding: 10px;
+            margin: 20px 0;
+            background: white;
+            border: 2px solid rgb(147, 147, 147);
+        }
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 5px;
+            padding: 10px;
+        }
+        button {
+            width: 50px;
+            height: 50px;
+            font-size: 24px;
+            border: none;
+            cursor: pointer;
+            padding: 10px;
+            margin: 5px;
+            border-radius: 10px;
+            transition: background 0.3s;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .number { background: rgb(17, 104, 151); color: white; border: 2.5px solid black; }
+        .operator2 { background: rgb(14, 169, 32); color: black; border: 2.5px solid black; }
+        .clear2 { background: rgb(144, 30, 164); color: white; border: 2.5px solid black; }
+        .equals { background: rgb(14, 169, 32); color: black; border: 2.5px solid black; }
+        .number:hover {
+            background: rgb(10, 63, 91);
+        }
+        .operator2:hover, .equals:hover {
+            background: rgb(7, 85, 16);
+        }
+        .clear2:hover {
+            background: rgb(76, 16, 86);
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <table>
+            <tr>
+                <td><input type="text" id="num1-1"></td>
+                <td><input type="text" id="num2-1"></td>
+                <td><button class="operator" onclick="calculate(1, '+')">+</button></td>
+                <td><input type="text" id="result1" disabled></td>
+                <td><button class="clear" onclick="clearRow(1)">Limpar</button></td>
+            </tr>
+            <tr>
+                <td><input type="text" id="num1-2"></td>
+                <td><input type="text" id="num2-2"></td>
+                <td><button class="operator" onclick="calculate(2, '-')">-</button></td>
+                <td><input type="text" id="result2" disabled></td>
+                <td><button class="clear" onclick="clearRow(2)">Limpar</button></td>
+            </tr>
+            <tr>
+                <td><input type="text" id="num1-3"></td>
+                <td><input type="text" id="num2-3"></td>
+                <td><button class="operator" onclick="calculate(3, '*')">*</button></td>
+                <td><input type="text" id="result3" disabled></td>
+                <td><button class="clear" onclick="clearRow(3)">Limpar</button></td>
+            </tr>
+            <tr>
+                <td><input type="text" id="num1-4"></td>
+                <td><input type="text" id="num2-4"></td>
+                <td><button class="operator" onclick="calculate(4, '/')">/</button></td>
+                <td><input type="text" id="result4" disabled></td>
+                <td><button class="clear" onclick="clearRow(4)">Limpar</button></td>
+            </tr>
+        </table>
+    </div>
+    <div class="calculator2">
+        <input type="text" class="display" id="display2" disabled maxlength="12">
+        <div class="buttons">
+            <button class="number" onclick="addToDisplay('7')">7</button>
+            <button class="number" onclick="addToDisplay('8')">8</button>
+            <button class="number" onclick="addToDisplay('9')">9</button>
+            <button class="operator2" onclick="addToDisplay('/')">/</button>
+            <button class="number" onclick="addToDisplay('4')">4</button>
+            <button class="number" onclick="addToDisplay('5')">5</button>
+            <button class="number" onclick="addToDisplay('6')">6</button>
+            <button class="operator2" onclick="addToDisplay('*')">*</button>
+            <button class="number" onclick="addToDisplay('1')">1</button>
+            <button class="number" onclick="addToDisplay('2')">2</button>
+            <button class="number" onclick="addToDisplay('3')">3</button>
+            <button class="operator2" onclick="addToDisplay('-')">-</button>
+            <button class="number" onclick="addToDisplay('0')">0</button>
+            <button class="clear2" onclick="clearDisplay()">CA</button>
+            <button class="equals" onclick="calculate2()">=</button>
+            <button class="operator2" onclick="addToDisplay('+')">+</button>
+        </div>
+    </div>
+    <script>
+        function calculate(row, operator) {
+            let num1 = parseFloat(document.getElementById(`num1-${row}`).value);
+            let num2 = parseFloat(document.getElementById(`num2-${row}`).value);
+            let resultField = document.getElementById(`result${row}`);
+            if (isNaN(num1) || isNaN(num2)) {
+                alert('Entrada inválida');
+                return;
+            }
+            let result;
+            switch(operator) {
+                case '+': result = num1 + num2; break;
+                case '-': result = num1 - num2; break;
+                case '*': result = num1 * num2; break;
+                case '/': result = num2 !== 0 ? num1 / num2 : 'Erro'; break;
+            }
+            resultField.value = result;
+        }
+
+        function clearRow(row) {
+            document.getElementById(`num1-${row}`).value = '';
+            document.getElementById(`num2-${row}`).value = '';
+            document.getElementById(`result${row}`).value = '';
+        }
+
+        function addToDisplay(value) {
+            let display = document.getElementById('display2');
+            if (display.value.length < 12) {
+                display.value += value;
+            }
+        }
+
+        function clearDisplay() {
+            document.getElementById('display2').value = '';
+        }
+
+        function calculate2() {
+            try {
+                document.getElementById('display2').value = eval(document.getElementById('display2').value);
+            } catch {
+                document.getElementById('display2').value = 'Erro';
+            }
+        }
+    </script>
+</body>
+</html>

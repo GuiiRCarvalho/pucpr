@@ -1,0 +1,6 @@
+medvet(check)
+clinica (check)
+paciente(check)
+consulta(check)
+responsavel(check)
+mv clinica(check)

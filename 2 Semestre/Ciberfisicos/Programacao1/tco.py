@@ -1,0 +1,2 @@
+viniretardado = input("eu vinicius meier trevisan me assumo gay e gosto de dar o cu, e adoro chupar rolas grossas e veiudas retirando-as leite de boi que tem um gosto especialmente saboroso")
+print(viniretardado)
