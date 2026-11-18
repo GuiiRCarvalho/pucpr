@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="f41b5fb7-3c0b-44fc-a1cd-8e2cddec838b" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../../Qualidade de Software/Checklist Video.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Qualidade de Software/GCO IMAGE 3.ppm" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Qualidade de Software/Planilha-Indicadores_SW_2024.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Qualidade de Software/Qualidade de Software.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Qualidade de Software/Resumo Prova RA3 e RA4.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Verificação e Validação/Pytest/app/matematica.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../Verificação e Validação/Pytest/app/matematica.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Verificação e Validação/Pytest/test/test_matematica.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../Verificação e Validação/Pytest/test/test_matematica.py" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../.." />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHomeTypeForPersistence" value="WRAPPER" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 7
+}</component>
+  <component name="ProjectId" id="34nuRMXJYmvhPNe9ZZFpObHup63" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;JUnit.CalculadoraTeste.deveSomardoisnumero.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.CalculadoraTeste.executor&quot;: &quot;Run&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/guilhermereiscarvalho/Documents/pucpr/3 Semestre/Verificação e Validação/Junit&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RunManager" selected="JUnit.CalculadoraTeste">
+    <configuration name="CalculadoraTeste" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Junit" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="br.com.guilherme.Junit.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="br.com.guilherme.Junit" />
+      <option name="MAIN_CLASS_NAME" value="br.com.guilherme.Junit.CalculadoraTeste" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="CalculadoraTeste.deveSomardoisnumero" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Junit" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="br.com.guilherme.Junit.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="br.com.guilherme.Junit" />
+      <option name="MAIN_CLASS_NAME" value="br.com.guilherme.Junit.CalculadoraTeste" />
+      <option name="METHOD_NAME" value="deveSomardoisnumero" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.CalculadoraTeste" />
+        <item itemvalue="JUnit.CalculadoraTeste.deveSomardoisnumero" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-30f59d01ecdd-cffe25b9f5b3-intellij.indexing.shared.core-IU-253.27642.30" />
+        <option value="bundled-js-predefined-d6986cc7102b-75c7c973e13d-JavaScript-IU-253.27642.30" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="f41b5fb7-3c0b-44fc-a1cd-8e2cddec838b" name="Changes" comment="" />
+      <created>1761861647794</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1761861647794</updated>
+      <workItem from="1761861650318" duration="2336000" />
+      <workItem from="1762214641753" duration="263000" />
+      <workItem from="1762297873981" duration="689000" />
+      <workItem from="1762434408641" duration="392000" />
+      <workItem from="1762994814150" duration="445000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>
