@@ -1,0 +1,7 @@
+T = 8, M = 200000, esperado = 1600000
+Execucao 1 sem semaforo: esperado = 1600000, obtido = 1134581, tempo = 45 ms
+Execucao 1 com semaforo: esperado = 1600000, obtido = 1600000, tempo = 20722 ms
+Execucao 2 sem semaforo: esperado = 1600000, obtido = 1251137, tempo = 15 ms
+Execucao 2 com semaforo: esperado = 1600000, obtido = 1600000, tempo = 17706 ms
+Execucao 3 sem semaforo: esperado = 1600000, obtido = 807696, tempo = 23 ms
+Execucao 3 com semaforo: esperado = 1600000, obtido = 1600000, tempo = 20063 ms

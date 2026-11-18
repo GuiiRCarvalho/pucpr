@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:color="http://www.omg.org/spec/BPMN/non-normative/color/1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Definitions_GDE1" targetNamespace="http://bpmn.io/schema/bpmn" name="GDE 1 - Diretrizes para decisão formal (AS-IS)" exporter="Claude" exporterVersion="1.0">
+  <bpmn:collaboration id="Collab_GDE1">
+    <bpmn:participant id="GDE1_PoolCli" name="Demandante / Partes Interessadas" processRef="GDE1_ProcCli"/>
+    <bpmn:participant id="GDE1_PoolOrg" name="Organização" processRef="GDE1_ProcOrg"/>
+    <bpmn:messageFlow id="GDE1_MF0" name="Necessidade de decisão" sourceRef="GDE1_cSend" targetRef="GDE1_s"/>
+  </bpmn:collaboration>
+  <bpmn:process id="GDE1_ProcCli" isExecutable="false">
+    <bpmn:startEvent id="GDE1_cStart" name="Necessidade de decisão identificada">
+      <bpmn:outgoing>GDE1_SF0</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sendTask id="GDE1_cSend" name="Comunicar necessidade de decisão">
+      <bpmn:incoming>GDE1_SF0</bpmn:incoming>
+      <bpmn:outgoing>GDE1_SF1</bpmn:outgoing>
+    </bpmn:sendTask>
+    <bpmn:endEvent id="GDE1_cEnd" name="Necessidade comunicada">
+      <bpmn:incoming>GDE1_SF1</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="GDE1_SF0" sourceRef="GDE1_cStart" targetRef="GDE1_cSend"/>
+    <bpmn:sequenceFlow id="GDE1_SF1" sourceRef="GDE1_cSend" targetRef="GDE1_cEnd"/>
+  </bpmn:process>
+  <bpmn:process id="GDE1_ProcOrg" isExecutable="false">
+    <bpmn:documentation>Resultado esperado: GDE 1 (A partir do nível F) Diretrizes definindo quando um processo formal de tomada de decisão, baseado em critérios, deve ser seguido e com a definição de papeis, com autoridade para tomada de decisão, são estabelecidas, mantidas atualizadas e usadas.</bpmn:documentation>
+    <bpmn:laneSet id="GDE1_LaneSet">
+      <bpmn:lane id="GDE1_Lane0" name="Gestão / Responsável pela Decisão">
+        <bpmn:flowNodeRef>GDE1_s</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>GDE1_n2</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>GDE1_n3</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>GDE1_n3_E</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>GDE1_n4</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>GDE1_n5</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="GDE1_Lane1" name="Equipe Técnica">
+        <bpmn:flowNodeRef>GDE1_n6</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>GDE1_n7</bpmn:flowNodeRef>
+      </bpmn:lane>
+    </bpmn:laneSet>
+    <bpmn:startEvent id="GDE1_s" name="Necessidade de decisão recebida">
+      <bpmn:outgoing>GDE1_SF2</bpmn:outgoing>
+      <bpmn:messageEventDefinition id="GDE1_s_med"/>
+    </bpmn:startEvent>
+    <bpmn:task id="GDE1_n2" name="Avaliar se a questão exige decisão conforme prática atual">
+      <bpmn:incoming>GDE1_SF2</bpmn:incoming>
+      <bpmn:outgoing>GDE1_SF3</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:exclusiveGateway id="GDE1_n3" name="Questão é crítica?" gatewayDirection="Diverging">
+      <bpmn:incoming>GDE1_SF3</bpmn:incoming>
+      <bpmn:outgoing>GDE1_SF4</bpmn:outgoing>
+      <bpmn:outgoing>GDE1_SF5</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:endEvent id="GDE1_n3_E" name="Questão tratada sem processo de decisão">
+      <bpmn:incoming>GDE1_SF4</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:task id="GDE1_n4" name="Definir quem decide de modo informal">
+      <bpmn:incoming>GDE1_SF5</bpmn:incoming>
+      <bpmn:outgoing>GDE1_SF6</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="GDE1_n5" name="Comunicar responsáveis pela decisão">
+      <bpmn:incoming>GDE1_SF6</bpmn:incoming>
+      <bpmn:outgoing>GDE1_SF7</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="GDE1_n6" name="Tomar ciência do papel na decisão">
+      <bpmn:incoming>GDE1_SF7</bpmn:incoming>
+      <bpmn:outgoing>GDE1_SF8</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:endEvent id="GDE1_n7" name="Papéis definidos conforme prática atual">
+      <bpmn:incoming>GDE1_SF8</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="GDE1_SF2" sourceRef="GDE1_s" targetRef="GDE1_n2"/>
+    <bpmn:sequenceFlow id="GDE1_SF3" sourceRef="GDE1_n2" targetRef="GDE1_n3"/>
+    <bpmn:sequenceFlow id="GDE1_SF4" name="Não" sourceRef="GDE1_n3" targetRef="GDE1_n3_E"/>
+    <bpmn:sequenceFlow id="GDE1_SF5" name="Sim" sourceRef="GDE1_n3" targetRef="GDE1_n4"/>
+    <bpmn:sequenceFlow id="GDE1_SF6" sourceRef="GDE1_n4" targetRef="GDE1_n5"/>
+    <bpmn:sequenceFlow id="GDE1_SF7" sourceRef="GDE1_n5" targetRef="GDE1_n6"/>
+    <bpmn:sequenceFlow id="GDE1_SF8" sourceRef="GDE1_n6" targetRef="GDE1_n7"/>
+    <bpmn:textAnnotation id="GDE1_A_n2"><bpmn:text>GDE 1 — Não foi identificado que a empresa possui definição formal para tomada de decisão.</bpmn:text></bpmn:textAnnotation>
+    <bpmn:association id="GDE1_A_n2_as0" associationDirection="None" sourceRef="GDE1_n2" targetRef="GDE1_A_n2"/>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="Diagram_GDE1" name="GDE 1 - Diretrizes para decisão formal (AS-IS)">
+    <bpmndi:BPMNPlane id="Plane_GDE1" bpmnElement="Collab_GDE1">
+      <bpmndi:BPMNShape id="GDE1_PoolCli_di" bpmnElement="GDE1_PoolCli" isHorizontal="true" color:background-color="#FFFFFF" color:border-color="#8E8AB5">
+        <dc:Bounds x="30" y="30" width="1370" height="150"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="GDE1_PoolOrg_di" bpmnElement="GDE1_PoolOrg" isHorizontal="true" color:background-color="#FFFFFF" color:border-color="#8E8AB5">
+        <dc:Bounds x="30" y="260" width="1370" height="680"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="GDE1_Lane0_di" bpmnElement="GDE1_Lane0" isHorizontal="true" color:background-color="#F3F7FE" color:border-color="#8E8AB5">
+        <dc:Bounds x="60" y="260" width="1340" height="340"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="GDE1_Lane1_di" bpmnElement="GDE1_Lane1" isHorizontal="true" color:background-color="#F3FAF4" color:border-color="#8E8AB5">
+        <dc:Bounds x="60" y="600" width="1340" height="340"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="GDE1_cStart_di" bpmnElement="GDE1_cStart" color:background-color="#BDEDE6" color:border-color="#2A9D8F">
+        <dc:Bounds x="132" y="87" width="36" height="36"/>
+        <bpmndi:BPMNLabel><dc:Bounds x="95" y="127" width="110" height="40"/></bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="GDE1_cSend_di" bpmnElement="GDE1_cSend" color:background-color="#CFE2F7" color:border-color="#2F6DB5">
+        <dc:Bounds x="280" y="65" width="120" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="GDE1_cEnd_di" bpmnElement="GDE1_cEnd" color:background-color="#F8C1D0" color:border-color="#C2185B">
+        <dc:Bounds x="512" y="87" width="36" height="36"/>
+        <bpmndi:BPMNLabel><dc:Bounds x="475" y="127" width="110" height="40"/></bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="GDE1_s_di" bpmnElement="GDE1_s" color:background-color="#BDEDE6" color:border-color="#2A9D8F">
+        <dc:Bounds x="132" y="427" width="36" height="36"/>
+        <bpmndi:BPMNLabel><dc:Bounds x="95" y="467" width="110" height="40"/></bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="GDE1_n2_di" bpmnElement="GDE1_n2" color:background-color="#CFE2F7" color:border-color="#2F6DB5">
+        <dc:Bounds x="280" y="405" width="120" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="GDE1_n3_di" bpmnElement="GDE1_n3" isMarkerVisible="true" color:background-color="#FFF3C4" color:border-color="#C99A1B">
+        <dc:Bounds x="505" y="420" width="50" height="50"/>
+        <bpmndi:BPMNLabel><dc:Bounds x="470" y="376" width="120" height="40"/></bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="GDE1_n3_E_di" bpmnElement="GDE1_n3_E" color:background-color="#F8C1D0" color:border-color="#C2185B">
+        <dc:Bounds x="512" y="522" width="36" height="36"/>
+        <bpmndi:BPMNLabel><dc:Bounds x="475" y="562" width="110" height="40"/></bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="GDE1_n4_di" bpmnElement="GDE1_n4" color:background-color="#CFE2F7" color:border-color="#2F6DB5">
+        <dc:Bounds x="660" y="405" width="120" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="GDE1_n5_di" bpmnElement="GDE1_n5" color:background-color="#CFE2F7" color:border-color="#2F6DB5">
+        <dc:Bounds x="850" y="405" width="120" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="GDE1_n6_di" bpmnElement="GDE1_n6" color:background-color="#CFE2F7" color:border-color="#2F6DB5">
+        <dc:Bounds x="1040" y="745" width="120" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="GDE1_n7_di" bpmnElement="GDE1_n7" color:background-color="#F8C1D0" color:border-color="#C2185B">
+        <dc:Bounds x="1272" y="767" width="36" height="36"/>
+        <bpmndi:BPMNLabel><dc:Bounds x="1235" y="807" width="110" height="40"/></bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="GDE1_A_n2_di" bpmnElement="GDE1_A_n2" color:background-color="#FDE7E7" color:border-color="#D9534F">
+        <dc:Bounds x="255" y="278" width="170" height="76"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="GDE1_SF0_di" bpmnElement="GDE1_SF0">
+        <di:waypoint x="168" y="105"/>
+        <di:waypoint x="280" y="105"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="GDE1_SF1_di" bpmnElement="GDE1_SF1">
+        <di:waypoint x="400" y="105"/>
+        <di:waypoint x="512" y="105"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="GDE1_SF2_di" bpmnElement="GDE1_SF2">
+        <di:waypoint x="168" y="445"/>
+        <di:waypoint x="280" y="445"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="GDE1_SF3_di" bpmnElement="GDE1_SF3">
+        <di:waypoint x="400" y="445"/>
+        <di:waypoint x="505" y="445"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="GDE1_SF4_di" bpmnElement="GDE1_SF4">
+        <di:waypoint x="530" y="470"/>
+        <di:waypoint x="530" y="522"/>
+        <bpmndi:BPMNLabel><dc:Bounds x="537" y="473" width="30" height="14"/></bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="GDE1_SF5_di" bpmnElement="GDE1_SF5">
+        <di:waypoint x="555" y="445"/>
+        <di:waypoint x="660" y="445"/>
+        <bpmndi:BPMNLabel><dc:Bounds x="557" y="423" width="30" height="14"/></bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="GDE1_SF6_di" bpmnElement="GDE1_SF6">
+        <di:waypoint x="780" y="445"/>
+        <di:waypoint x="850" y="445"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="GDE1_SF7_di" bpmnElement="GDE1_SF7">
+        <di:waypoint x="970" y="445"/>
+        <di:waypoint x="1005" y="445"/>
+        <di:waypoint x="1005" y="785"/>
+        <di:waypoint x="1040" y="785"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="GDE1_SF8_di" bpmnElement="GDE1_SF8">
+        <di:waypoint x="1160" y="785"/>
+        <di:waypoint x="1272" y="785"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="GDE1_A_n2_as0_di" bpmnElement="GDE1_A_n2_as0">
+        <di:waypoint x="340" y="354"/>
+        <di:waypoint x="340" y="405"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="GDE1_MF0_di" bpmnElement="GDE1_MF0">
+        <di:waypoint x="340" y="145"/>
+        <di:waypoint x="340" y="205"/>
+        <di:waypoint x="150" y="205"/>
+        <di:waypoint x="150" y="427"/>
+        <bpmndi:BPMNLabel><dc:Bounds x="200" y="208" width="150" height="32"/></bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

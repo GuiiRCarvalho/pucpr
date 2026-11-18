@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:color="http://www.omg.org/spec/BPMN/non-normative/color/1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Definitions_GDE5" targetNamespace="http://bpmn.io/schema/bpmn" name="GDE 5 - Seleção dos métodos de avaliação (AS-IS)" exporter="Claude" exporterVersion="1.0">
+  <bpmn:collaboration id="Collab_GDE5">
+    <bpmn:participant id="GDE5_PoolCli" name="Demandante / Partes Interessadas" processRef="GDE5_ProcCli"/>
+    <bpmn:participant id="GDE5_PoolOrg" name="Organização" processRef="GDE5_ProcOrg"/>
+    <bpmn:messageFlow id="GDE5_MF0" name="Critérios de avaliação" sourceRef="GDE5_cSend" targetRef="GDE5_s"/>
+  </bpmn:collaboration>
+  <bpmn:process id="GDE5_ProcCli" isExecutable="false">
+    <bpmn:startEvent id="GDE5_cStart" name="Critérios de avaliação considerados">
+      <bpmn:outgoing>GDE5_SF0</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sendTask id="GDE5_cSend" name="Comunicar critérios para escolha de método">
+      <bpmn:incoming>GDE5_SF0</bpmn:incoming>
+      <bpmn:outgoing>GDE5_SF1</bpmn:outgoing>
+    </bpmn:sendTask>
+    <bpmn:endEvent id="GDE5_cEnd" name="Critérios comunicados">
+      <bpmn:incoming>GDE5_SF1</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="GDE5_SF0" sourceRef="GDE5_cStart" targetRef="GDE5_cSend"/>
+    <bpmn:sequenceFlow id="GDE5_SF1" sourceRef="GDE5_cSend" targetRef="GDE5_cEnd"/>
+  </bpmn:process>
+  <bpmn:process id="GDE5_ProcOrg" isExecutable="false">
+    <bpmn:documentation>Resultado esperado: GDE 5 (A partir do nível F) Métodos de avaliação das alternativas de solução são selecionados.</bpmn:documentation>
+    <bpmn:laneSet id="GDE5_LaneSet">
+      <bpmn:lane id="GDE5_Lane0" name="Gestão / Responsável pela Decisão">
+        <bpmn:flowNodeRef>GDE5_s</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>GDE5_n2</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>GDE5_n5</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>GDE5_n6</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="GDE5_Lane1" name="Equipe Técnica">
+        <bpmn:flowNodeRef>GDE5_t1</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>GDE5_n4</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>GDE5_n4_L</bpmn:flowNodeRef>
+      </bpmn:lane>
+    </bpmn:laneSet>
+    <bpmn:startEvent id="GDE5_s" name="Critérios de avaliação recebidos">
+      <bpmn:outgoing>GDE5_SF2</bpmn:outgoing>
+      <bpmn:messageEventDefinition id="GDE5_s_med"/>
+    </bpmn:startEvent>
+    <bpmn:task id="GDE5_n2" name="Solicitar proposta de método de avaliação à equipe">
+      <bpmn:incoming>GDE5_SF2</bpmn:incoming>
+      <bpmn:outgoing>GDE5_SF3</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="GDE5_t1" name="Escolher método de avaliação de modo informal">
+      <bpmn:incoming>GDE5_SF3</bpmn:incoming>
+      <bpmn:incoming>GDE5_SF6</bpmn:incoming>
+      <bpmn:outgoing>GDE5_SF4</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:exclusiveGateway id="GDE5_n4" name="Método aceito pela gestão?" gatewayDirection="Diverging">
+      <bpmn:incoming>GDE5_SF4</bpmn:incoming>
+      <bpmn:outgoing>GDE5_SF5</bpmn:outgoing>
+      <bpmn:outgoing>GDE5_SF7</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:task id="GDE5_n4_L" name="Escolher outro método">
+      <bpmn:incoming>GDE5_SF5</bpmn:incoming>
+      <bpmn:outgoing>GDE5_SF6</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="GDE5_n5" name="Aprovar método verbalmente">
+      <bpmn:incoming>GDE5_SF7</bpmn:incoming>
+      <bpmn:outgoing>GDE5_SF8</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:endEvent id="GDE5_n6" name="Método definido conforme prática atual">
+      <bpmn:incoming>GDE5_SF8</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="GDE5_SF2" sourceRef="GDE5_s" targetRef="GDE5_n2"/>
+    <bpmn:sequenceFlow id="GDE5_SF3" sourceRef="GDE5_n2" targetRef="GDE5_t1"/>
+    <bpmn:sequenceFlow id="GDE5_SF4" sourceRef="GDE5_t1" targetRef="GDE5_n4"/>
+    <bpmn:sequenceFlow id="GDE5_SF5" name="Não" sourceRef="GDE5_n4" targetRef="GDE5_n4_L"/>
+    <bpmn:sequenceFlow id="GDE5_SF6" sourceRef="GDE5_n4_L" targetRef="GDE5_t1"/>
+    <bpmn:sequenceFlow id="GDE5_SF7" name="Sim" sourceRef="GDE5_n4" targetRef="GDE5_n5"/>
+    <bpmn:sequenceFlow id="GDE5_SF8" sourceRef="GDE5_n5" targetRef="GDE5_n6"/>
+    <bpmn:textAnnotation id="GDE5_A_t1"><bpmn:text>GDE 5 — Não existe um planejamento de como os métodos são desenvolvidos.</bpmn:text></bpmn:textAnnotation>
+    <bpmn:association id="GDE5_A_t1_as0" associationDirection="None" sourceRef="GDE5_t1" targetRef="GDE5_A_t1"/>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="Diagram_GDE5" name="GDE 5 - Seleção dos métodos de avaliação (AS-IS)">
+    <bpmndi:BPMNPlane id="Plane_GDE5" bpmnElement="Collab_GDE5">
+      <bpmndi:BPMNShape id="GDE5_PoolCli_di" bpmnElement="GDE5_PoolCli" isHorizontal="true" color:background-color="#FFFFFF" color:border-color="#8E8AB5">
+        <dc:Bounds x="30" y="30" width="1180" height="150"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="GDE5_PoolOrg_di" bpmnElement="GDE5_PoolOrg" isHorizontal="true" color:background-color="#FFFFFF" color:border-color="#8E8AB5">
+        <dc:Bounds x="30" y="260" width="1180" height="680"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="GDE5_Lane0_di" bpmnElement="GDE5_Lane0" isHorizontal="true" color:background-color="#F3F7FE" color:border-color="#8E8AB5">
+        <dc:Bounds x="60" y="260" width="1150" height="340"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="GDE5_Lane1_di" bpmnElement="GDE5_Lane1" isHorizontal="true" color:background-color="#F3FAF4" color:border-color="#8E8AB5">
+        <dc:Bounds x="60" y="600" width="1150" height="340"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="GDE5_cStart_di" bpmnElement="GDE5_cStart" color:background-color="#BDEDE6" color:border-color="#2A9D8F">
+        <dc:Bounds x="132" y="87" width="36" height="36"/>
+        <bpmndi:BPMNLabel><dc:Bounds x="95" y="127" width="110" height="40"/></bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="GDE5_cSend_di" bpmnElement="GDE5_cSend" color:background-color="#CFE2F7" color:border-color="#2F6DB5">
+        <dc:Bounds x="280" y="65" width="120" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="GDE5_cEnd_di" bpmnElement="GDE5_cEnd" color:background-color="#F8C1D0" color:border-color="#C2185B">
+        <dc:Bounds x="512" y="87" width="36" height="36"/>
+        <bpmndi:BPMNLabel><dc:Bounds x="475" y="127" width="110" height="40"/></bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="GDE5_s_di" bpmnElement="GDE5_s" color:background-color="#BDEDE6" color:border-color="#2A9D8F">
+        <dc:Bounds x="132" y="427" width="36" height="36"/>
+        <bpmndi:BPMNLabel><dc:Bounds x="95" y="467" width="110" height="40"/></bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="GDE5_n2_di" bpmnElement="GDE5_n2" color:background-color="#CFE2F7" color:border-color="#2F6DB5">
+        <dc:Bounds x="280" y="405" width="120" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="GDE5_t1_di" bpmnElement="GDE5_t1" color:background-color="#CFE2F7" color:border-color="#2F6DB5">
+        <dc:Bounds x="470" y="745" width="120" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="GDE5_n4_di" bpmnElement="GDE5_n4" isMarkerVisible="true" color:background-color="#FFF3C4" color:border-color="#C99A1B">
+        <dc:Bounds x="695" y="760" width="50" height="50"/>
+        <bpmndi:BPMNLabel><dc:Bounds x="660" y="716" width="120" height="40"/></bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="GDE5_n4_L_di" bpmnElement="GDE5_n4_L" color:background-color="#CFE2F7" color:border-color="#2F6DB5">
+        <dc:Bounds x="660" y="850" width="120" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="GDE5_n5_di" bpmnElement="GDE5_n5" color:background-color="#CFE2F7" color:border-color="#2F6DB5">
+        <dc:Bounds x="850" y="405" width="120" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="GDE5_n6_di" bpmnElement="GDE5_n6" color:background-color="#F8C1D0" color:border-color="#C2185B">
+        <dc:Bounds x="1082" y="427" width="36" height="36"/>
+        <bpmndi:BPMNLabel><dc:Bounds x="1045" y="467" width="110" height="40"/></bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="GDE5_A_t1_di" bpmnElement="GDE5_A_t1" color:background-color="#FDE7E7" color:border-color="#D9534F">
+        <dc:Bounds x="445" y="618" width="170" height="61"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="GDE5_SF0_di" bpmnElement="GDE5_SF0">
+        <di:waypoint x="168" y="105"/>
+        <di:waypoint x="280" y="105"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="GDE5_SF1_di" bpmnElement="GDE5_SF1">
+        <di:waypoint x="400" y="105"/>
+        <di:waypoint x="512" y="105"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="GDE5_SF2_di" bpmnElement="GDE5_SF2">
+        <di:waypoint x="168" y="445"/>
+        <di:waypoint x="280" y="445"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="GDE5_SF3_di" bpmnElement="GDE5_SF3">
+        <di:waypoint x="400" y="445"/>
+        <di:waypoint x="435" y="445"/>
+        <di:waypoint x="435" y="785"/>
+        <di:waypoint x="470" y="785"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="GDE5_SF4_di" bpmnElement="GDE5_SF4">
+        <di:waypoint x="590" y="785"/>
+        <di:waypoint x="695" y="785"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="GDE5_SF5_di" bpmnElement="GDE5_SF5">
+        <di:waypoint x="720" y="810"/>
+        <di:waypoint x="720" y="850"/>
+        <bpmndi:BPMNLabel><dc:Bounds x="727" y="813" width="30" height="14"/></bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="GDE5_SF6_di" bpmnElement="GDE5_SF6">
+        <di:waypoint x="660" y="890"/>
+        <di:waypoint x="530" y="890"/>
+        <di:waypoint x="530" y="825"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="GDE5_SF7_di" bpmnElement="GDE5_SF7">
+        <di:waypoint x="745" y="785"/>
+        <di:waypoint x="798" y="785"/>
+        <di:waypoint x="798" y="445"/>
+        <di:waypoint x="850" y="445"/>
+        <bpmndi:BPMNLabel><dc:Bounds x="747" y="763" width="30" height="14"/></bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="GDE5_SF8_di" bpmnElement="GDE5_SF8">
+        <di:waypoint x="970" y="445"/>
+        <di:waypoint x="1082" y="445"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="GDE5_A_t1_as0_di" bpmnElement="GDE5_A_t1_as0">
+        <di:waypoint x="530" y="679"/>
+        <di:waypoint x="530" y="745"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="GDE5_MF0_di" bpmnElement="GDE5_MF0">
+        <di:waypoint x="340" y="145"/>
+        <di:waypoint x="340" y="205"/>
+        <di:waypoint x="150" y="205"/>
+        <di:waypoint x="150" y="427"/>
+        <bpmndi:BPMNLabel><dc:Bounds x="200" y="208" width="150" height="32"/></bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

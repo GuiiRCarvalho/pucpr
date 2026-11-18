@@ -1,0 +1,11 @@
+T1 tentando pegar LOCK_A
+T2 tentando pegar LOCK_A
+T1 pegou LOCK_A
+T1 tentando pegar LOCK_B
+T1 pegou LOCK_B
+T1 concluiu
+T2 pegou LOCK_A
+T2 tentando pegar LOCK_B
+T2 pegou LOCK_B
+T2 concluiu
+Terminou sem deadlock

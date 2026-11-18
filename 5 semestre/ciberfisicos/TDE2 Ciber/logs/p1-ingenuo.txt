@@ -1,0 +1,15 @@
+Filosofo 0: pensando
+Filosofo 3: pensando
+Filosofo 1: pensando
+Filosofo 4: pensando
+Filosofo 2: pensando
+Filosofo 3: com fome
+Filosofo 1: com fome
+Filosofo 2: com fome
+Filosofo 4: com fome
+Filosofo 0: com fome
+Filosofo 1: pegou o garfo 1 (esquerda)
+Filosofo 3: pegou o garfo 3 (esquerda)
+Filosofo 0: pegou o garfo 0 (esquerda)
+Filosofo 2: pegou o garfo 2 (esquerda)
+Filosofo 4: pegou o garfo 4 (esquerda)

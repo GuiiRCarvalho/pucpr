@@ -1,0 +1,398 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_FabriK_REQ" targetNamespace="https://fabrik.example/processos/req">
+  <process id="Process_REQ_FabriK" name="Engenharia de Requisitos e Controle de Mudanças" isExecutable="false">
+    <laneSet id="LaneSet_REQ">
+      <lane id="Lane_Client" name="Cliente">
+        <flowNodeRef>Start_Request</flowNodeRef>
+        <flowNodeRef>Submit_Request</flowNodeRef>
+        <flowNodeRef>Customer_Review</flowNodeRef>
+        <flowNodeRef>Gateway_Approved</flowNodeRef>
+      </lane>
+      <lane id="Lane_GP" name="Gerente de Projeto (GP)">
+        <flowNodeRef>Register_Request</flowNodeRef>
+        <flowNodeRef>Gateway_Change</flowNodeRef>
+        <flowNodeRef>Negotiate</flowNodeRef>
+      </lane>
+      <lane id="Lane_Analyst" name="Analista de Negócios">
+        <flowNodeRef>Impact_Analysis</flowNodeRef>
+        <flowNodeRef>Elicit_Specify</flowNodeRef>
+        <flowNodeRef>Baseline_Req</flowNodeRef>
+      </lane>
+      <lane id="Lane_Team" name="Equipe Técnica">
+        <flowNodeRef>Review_Commit</flowNodeRef>
+        <flowNodeRef>Gateway_Feasible</flowNodeRef>
+        <flowNodeRef>Implement</flowNodeRef>
+        <flowNodeRef>Correct</flowNodeRef>
+        <flowNodeRef>Direct_Request</flowNodeRef>
+        <flowNodeRef>Route_To_GP</flowNodeRef>
+      </lane>
+      <lane id="Lane_QA_GCO" name="QA / GCO">
+        <flowNodeRef>Verify_Test</flowNodeRef>
+        <flowNodeRef>Gateway_Test</flowNodeRef>
+        <flowNodeRef>Release</flowNodeRef>
+        <flowNodeRef>End_Release</flowNodeRef>
+      </lane>
+    </laneSet>
+    <startEvent id="Start_Request" name="Demanda recebida"/>
+    <userTask id="Submit_Request" name="Formalizar necessidade ou mudança"/>
+    <userTask id="Register_Request" name="Registrar solicitação e definir responsável"/>
+    <exclusiveGateway id="Gateway_Change" name="Mudança de requisito?" gatewayDirection="Diverging"/>
+    <userTask id="Impact_Analysis" name="Analisar impacto da mudança"/>
+    <userTask id="Elicit_Specify" name="Elicitar, especificar e priorizar requisitos">
+      <documentation>REQ 1 e REQ 2: identificar e confirmar necessidades, expectativas, restrições e interfaces; especificar, priorizar e atualizar requisitos.</documentation>
+    </userTask>
+    <userTask id="Review_Commit" name="Revisar requisitos, estimar e firmar compromisso">
+      <documentation>REQ 3: obter compromisso da equipe técnica com a implementação.</documentation>
+    </userTask>
+    <exclusiveGateway id="Gateway_Feasible" name="Viável?" gatewayDirection="Diverging"/>
+    <userTask id="Negotiate" name="GP + Analista: corrigir inconsistências e negociar escopo">
+      <documentation>REQ 5: identificar e corrigir inconsistências entre requisitos, planos e produtos.</documentation>
+    </userTask>
+    <userTask id="Customer_Review" name="Revisar entendimento e critérios de aceite"/>
+    <exclusiveGateway id="Gateway_Approved" name="Aceite do cliente?" gatewayDirection="Diverging"/>
+    <userTask id="Baseline_Req" name="Aprovar baseline e atualizar rastreabilidade">
+      <documentation>REQ 4: estabelecer e manter rastreabilidade bidirecional entre requisitos e produtos de trabalho.</documentation>
+    </userTask>
+    <userTask id="Implement" name="Implementar requisitos aprovados na baseline"/>
+    <userTask id="Verify_Test" name="Verificar requisitos e testar a versão">
+      <documentation>Bloquear liberação se requisitos, testes, versão ou não conformidades críticas não estiverem tratados.</documentation>
+    </userTask>
+    <exclusiveGateway id="Gateway_Test" name="Passou nos testes?" gatewayDirection="Diverging"/>
+    <userTask id="Correct" name="Corrigir inconsistências e defeitos"/>
+    <userTask id="Release" name="Controlar baseline e liberar pacote identificado"/>
+    <endEvent id="End_Release" name="Pacote de release liberado"/>
+    <startEvent id="Direct_Request" name="Solicitação direta recebida"/>
+    <userTask id="Route_To_GP" name="Registrar e encaminhar ao GP; não iniciar trabalho"/>
+    <sequenceFlow id="F01" sourceRef="Start_Request" targetRef="Submit_Request"/>
+    <sequenceFlow id="F02" sourceRef="Submit_Request" targetRef="Register_Request"/>
+    <sequenceFlow id="F03" sourceRef="Register_Request" targetRef="Gateway_Change"/>
+    <sequenceFlow id="F04" sourceRef="Gateway_Change" targetRef="Impact_Analysis" name="Sim"/>
+    <sequenceFlow id="F05" sourceRef="Gateway_Change" targetRef="Elicit_Specify" name="Não"/>
+    <sequenceFlow id="F06" sourceRef="Impact_Analysis" targetRef="Elicit_Specify"/>
+    <sequenceFlow id="F07" sourceRef="Elicit_Specify" targetRef="Review_Commit"/>
+    <sequenceFlow id="F08" sourceRef="Review_Commit" targetRef="Gateway_Feasible"/>
+    <sequenceFlow id="F09" sourceRef="Gateway_Feasible" targetRef="Negotiate" name="Não"/>
+    <sequenceFlow id="F10" sourceRef="Gateway_Feasible" targetRef="Customer_Review" name="Sim"/>
+    <sequenceFlow id="F11" sourceRef="Negotiate" targetRef="Elicit_Specify" name="Revisar"/>
+    <sequenceFlow id="F12" sourceRef="Customer_Review" targetRef="Gateway_Approved"/>
+    <sequenceFlow id="F13" sourceRef="Gateway_Approved" targetRef="Negotiate" name="Não"/>
+    <sequenceFlow id="F14" sourceRef="Gateway_Approved" targetRef="Baseline_Req" name="Sim"/>
+    <sequenceFlow id="F15" sourceRef="Baseline_Req" targetRef="Implement"/>
+    <sequenceFlow id="F16" sourceRef="Implement" targetRef="Verify_Test"/>
+    <sequenceFlow id="F17" sourceRef="Verify_Test" targetRef="Gateway_Test"/>
+    <sequenceFlow id="F18" sourceRef="Gateway_Test" targetRef="Correct" name="Não"/>
+    <sequenceFlow id="F19" sourceRef="Correct" targetRef="Verify_Test" name="Reverificação"/>
+    <sequenceFlow id="F20" sourceRef="Gateway_Test" targetRef="Release" name="Sim"/>
+    <sequenceFlow id="F21" sourceRef="Release" targetRef="End_Release"/>
+    <sequenceFlow id="F22" sourceRef="Direct_Request" targetRef="Route_To_GP"/>
+    <sequenceFlow id="F23" sourceRef="Route_To_GP" targetRef="Register_Request"/>
+    <dataObject id="Data_D01" name="Oportunidade/contrato ou pedido de mudança"/>
+    <dataObjectReference id="Ref_D01" name="Oportunidade/contrato ou pedido de mudança" dataObjectRef="Data_D01"/>
+    <association id="Assoc_D01" sourceRef="Ref_D01" targetRef="Register_Request" associationDirection="One"/>
+    <dataObject id="Data_D02" name="Necessidade e restrições do cliente"/>
+    <dataObjectReference id="Ref_D02" name="Necessidade e restrições do cliente" dataObjectRef="Data_D02"/>
+    <association id="Assoc_D02" sourceRef="Ref_D02" targetRef="Elicit_Specify" associationDirection="One"/>
+    <dataObject id="Data_D03" name="Arquitetura e ambientes existentes"/>
+    <dataObjectReference id="Ref_D03" name="Arquitetura e ambientes existentes" dataObjectRef="Data_D03"/>
+    <association id="Assoc_D03" sourceRef="Ref_D03" targetRef="Review_Commit" associationDirection="One"/>
+    <dataObject id="Data_D04" name="Disponibilidade da equipe"/>
+    <dataObjectReference id="Ref_D04" name="Disponibilidade da equipe" dataObjectRef="Data_D04"/>
+    <association id="Assoc_D04" sourceRef="Ref_D04" targetRef="Review_Commit" associationDirection="One"/>
+    <dataObject id="Data_D05" name="Critérios de qualidade e configuração"/>
+    <dataObjectReference id="Ref_D05" name="Critérios de qualidade e configuração" dataObjectRef="Data_D05"/>
+    <association id="Assoc_D05" sourceRef="Ref_D05" targetRef="Elicit_Specify" associationDirection="One"/>
+    <dataObject id="Data_D06" name="Registro de elicitação"/>
+    <dataObjectReference id="Ref_D06" name="Registro de elicitação" dataObjectRef="Data_D06"/>
+    <association id="Assoc_D06" sourceRef="Elicit_Specify" targetRef="Ref_D06" associationDirection="One"/>
+    <dataObject id="Data_D07" name="Aceite do entendimento"/>
+    <dataObjectReference id="Ref_D07" name="Aceite do entendimento" dataObjectRef="Data_D07"/>
+    <association id="Assoc_D07" sourceRef="Customer_Review" targetRef="Ref_D07" associationDirection="One"/>
+    <dataObject id="Data_D08" name="Requisitos versionados"/>
+    <dataObjectReference id="Ref_D08" name="Requisitos versionados" dataObjectRef="Data_D08"/>
+    <association id="Assoc_D08" sourceRef="Baseline_Req" targetRef="Ref_D08" associationDirection="One"/>
+    <dataObject id="Data_D09" name="Histórico de mudanças"/>
+    <dataObjectReference id="Ref_D09" name="Histórico de mudanças" dataObjectRef="Data_D09"/>
+    <association id="Assoc_D09" sourceRef="Baseline_Req" targetRef="Ref_D09" associationDirection="One"/>
+    <dataObject id="Data_D10" name="Ata de revisão"/>
+    <dataObjectReference id="Ref_D10" name="Ata de revisão" dataObjectRef="Data_D10"/>
+    <association id="Assoc_D10" sourceRef="Review_Commit" targetRef="Ref_D10" associationDirection="One"/>
+    <dataObject id="Data_D11" name="Estimativas e compromisso"/>
+    <dataObjectReference id="Ref_D11" name="Estimativas e compromisso" dataObjectRef="Data_D11"/>
+    <association id="Assoc_D11" sourceRef="Review_Commit" targetRef="Ref_D11" associationDirection="One"/>
+    <dataObject id="Data_D12" name="Análise de impacto"/>
+    <dataObjectReference id="Ref_D12" name="Análise de impacto" dataObjectRef="Data_D12"/>
+    <association id="Assoc_D12" sourceRef="Impact_Analysis" targetRef="Ref_D12" associationDirection="One"/>
+    <dataObject id="Data_D13" name="Decisão"/>
+    <dataObjectReference id="Ref_D13" name="Decisão" dataObjectRef="Data_D13"/>
+    <association id="Assoc_D13" sourceRef="Negotiate" targetRef="Ref_D13" associationDirection="One"/>
+    <dataObject id="Data_D14" name="Matriz/links de rastreabilidade"/>
+    <dataObjectReference id="Ref_D14" name="Matriz/links de rastreabilidade" dataObjectRef="Data_D14"/>
+    <association id="Assoc_D14" sourceRef="Baseline_Req" targetRef="Ref_D14" associationDirection="One"/>
+    <dataObject id="Data_D15" name="Baseline"/>
+    <dataObjectReference id="Ref_D15" name="Baseline" dataObjectRef="Data_D15"/>
+    <association id="Assoc_D15" sourceRef="Baseline_Req" targetRef="Ref_D15" associationDirection="One"/>
+    <dataObject id="Data_D16" name="Pendências fechadas"/>
+    <dataObjectReference id="Ref_D16" name="Pendências fechadas" dataObjectRef="Data_D16"/>
+    <association id="Assoc_D16" sourceRef="Negotiate" targetRef="Ref_D16" associationDirection="One"/>
+    <dataObject id="Data_D17" name="Testes, resultados e não conformidades"/>
+    <dataObjectReference id="Ref_D17" name="Testes, resultados e não conformidades" dataObjectRef="Data_D17"/>
+    <association id="Assoc_D17" sourceRef="Verify_Test" targetRef="Ref_D17" associationDirection="One"/>
+    <dataObject id="Data_D18" name="Pacote de release"/>
+    <dataObjectReference id="Ref_D18" name="Pacote de release" dataObjectRef="Data_D18"/>
+    <association id="Assoc_D18" sourceRef="Release" targetRef="Ref_D18" associationDirection="One"/>
+    <textAnnotation id="Annotation_Direct_Request">
+      <text>Solicitação que chega diretamente à equipe técnica é registrada e encaminhada ao GP; o trabalho não começa sem aprovação.</text>
+    </textAnnotation>
+    <association id="Assoc_Direct_Request_Note" sourceRef="Route_To_GP" targetRef="Annotation_Direct_Request" associationDirection="None"/>
+  </process>
+  <bpmndi:BPMNDiagram id="Diagram_REQ_FabriK">
+    <bpmndi:BPMNPlane id="Plane_REQ_FabriK" bpmnElement="Process_REQ_FabriK">
+      <bpmndi:BPMNShape id="Shape_Lane_Client" bpmnElement="Lane_Client" isHorizontal="false">
+        <dc:Bounds x="40" y="100" width="280" height="880"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_Lane_GP" bpmnElement="Lane_GP" isHorizontal="false">
+        <dc:Bounds x="320" y="100" width="270" height="880"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_Lane_Analyst" bpmnElement="Lane_Analyst" isHorizontal="false">
+        <dc:Bounds x="590" y="100" width="300" height="880"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_Lane_Team" bpmnElement="Lane_Team" isHorizontal="false">
+        <dc:Bounds x="890" y="100" width="300" height="880"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_Lane_QA_GCO" bpmnElement="Lane_QA_GCO" isHorizontal="false">
+        <dc:Bounds x="1190" y="100" width="420" height="880"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_Start_Request" bpmnElement="Start_Request">
+        <dc:Bounds x="162" y="175" width="36" height="36"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_Submit_Request" bpmnElement="Submit_Request">
+        <dc:Bounds x="95" y="235" width="170" height="90"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_Register_Request" bpmnElement="Register_Request">
+        <dc:Bounds x="370" y="235" width="180" height="90"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_Gateway_Change" bpmnElement="Gateway_Change">
+        <dc:Bounds x="432" y="365" width="55" height="55"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_Impact_Analysis" bpmnElement="Impact_Analysis">
+        <dc:Bounds x="640" y="380" width="200" height="90"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_Elicit_Specify" bpmnElement="Elicit_Specify">
+        <dc:Bounds x="635" y="495" width="210" height="90"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_Review_Commit" bpmnElement="Review_Commit">
+        <dc:Bounds x="935" y="495" width="210" height="90"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_Gateway_Feasible" bpmnElement="Gateway_Feasible">
+        <dc:Bounds x="1005" y="620" width="55" height="55"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_Negotiate" bpmnElement="Negotiate">
+        <dc:Bounds x="345" y="645" width="200" height="100"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_Customer_Review" bpmnElement="Customer_Review">
+        <dc:Bounds x="80" y="620" width="190" height="90"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_Gateway_Approved" bpmnElement="Gateway_Approved">
+        <dc:Bounds x="147" y="750" width="55" height="55"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_Baseline_Req" bpmnElement="Baseline_Req">
+        <dc:Bounds x="635" y="765" width="210" height="90"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_Implement" bpmnElement="Implement">
+        <dc:Bounds x="935" y="765" width="210" height="90"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_Verify_Test" bpmnElement="Verify_Test">
+        <dc:Bounds x="1210" y="765" width="170" height="90"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_Gateway_Test" bpmnElement="Gateway_Test">
+        <dc:Bounds x="1275" y="875" width="55" height="55"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_Correct" bpmnElement="Correct">
+        <dc:Bounds x="930" y="870" width="180" height="90"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_Release" bpmnElement="Release">
+        <dc:Bounds x="1385" y="870" width="160" height="90"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_End_Release" bpmnElement="End_Release">
+        <dc:Bounds x="1570" y="895" width="36" height="36"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_Direct_Request" bpmnElement="Direct_Request">
+        <dc:Bounds x="1032" y="175" width="36" height="36"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_Route_To_GP" bpmnElement="Route_To_GP">
+        <dc:Bounds x="940" y="255" width="190" height="90"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_Ref_D01" bpmnElement="Ref_D01">
+        <dc:Bounds x="1630" y="150" width="640" height="34"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_Ref_D02" bpmnElement="Ref_D02">
+        <dc:Bounds x="1630" y="186" width="640" height="34"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_Ref_D03" bpmnElement="Ref_D03">
+        <dc:Bounds x="1630" y="222" width="640" height="34"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_Ref_D04" bpmnElement="Ref_D04">
+        <dc:Bounds x="1630" y="258" width="640" height="34"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_Ref_D05" bpmnElement="Ref_D05">
+        <dc:Bounds x="1630" y="294" width="640" height="34"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_Ref_D06" bpmnElement="Ref_D06">
+        <dc:Bounds x="1630" y="348" width="640" height="34"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_Ref_D07" bpmnElement="Ref_D07">
+        <dc:Bounds x="1630" y="384" width="640" height="34"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_Ref_D08" bpmnElement="Ref_D08">
+        <dc:Bounds x="1630" y="420" width="640" height="34"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_Ref_D09" bpmnElement="Ref_D09">
+        <dc:Bounds x="1630" y="456" width="640" height="34"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_Ref_D10" bpmnElement="Ref_D10">
+        <dc:Bounds x="1630" y="492" width="640" height="34"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_Ref_D11" bpmnElement="Ref_D11">
+        <dc:Bounds x="1630" y="528" width="640" height="34"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_Ref_D12" bpmnElement="Ref_D12">
+        <dc:Bounds x="1630" y="564" width="640" height="34"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_Ref_D13" bpmnElement="Ref_D13">
+        <dc:Bounds x="1630" y="600" width="640" height="34"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_Ref_D14" bpmnElement="Ref_D14">
+        <dc:Bounds x="1630" y="636" width="640" height="34"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_Ref_D15" bpmnElement="Ref_D15">
+        <dc:Bounds x="1630" y="672" width="640" height="34"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_Ref_D16" bpmnElement="Ref_D16">
+        <dc:Bounds x="1630" y="708" width="640" height="34"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_Ref_D17" bpmnElement="Ref_D17">
+        <dc:Bounds x="1630" y="744" width="640" height="34"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_Ref_D18" bpmnElement="Ref_D18">
+        <dc:Bounds x="1630" y="780" width="640" height="34"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_Annotation_Direct_Request" bpmnElement="Annotation_Direct_Request">
+        <dc:Bounds x="920" y="325" width="250" height="46"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Edge_F01" bpmnElement="F01">
+        <di:waypoint x="180" y="211"/>
+        <di:waypoint x="180" y="235"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge_F02" bpmnElement="F02">
+        <di:waypoint x="265" y="280"/>
+        <di:waypoint x="370" y="280"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge_F03" bpmnElement="F03">
+        <di:waypoint x="460" y="325"/>
+        <di:waypoint x="460" y="365"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge_F04" bpmnElement="F04">
+        <di:waypoint x="487" y="392"/>
+        <di:waypoint x="560" y="392"/>
+        <di:waypoint x="560" y="425"/>
+        <di:waypoint x="640" y="425"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge_F05" bpmnElement="F05">
+        <di:waypoint x="460" y="420"/>
+        <di:waypoint x="460" y="480"/>
+        <di:waypoint x="620" y="480"/>
+        <di:waypoint x="620" y="530"/>
+        <di:waypoint x="635" y="530"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge_F06" bpmnElement="F06">
+        <di:waypoint x="740" y="470"/>
+        <di:waypoint x="740" y="495"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge_F07" bpmnElement="F07">
+        <di:waypoint x="845" y="540"/>
+        <di:waypoint x="935" y="540"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge_F08" bpmnElement="F08">
+        <di:waypoint x="1040" y="585"/>
+        <di:waypoint x="1040" y="620"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge_F09" bpmnElement="F09">
+        <di:waypoint x="1005" y="647"/>
+        <di:waypoint x="950" y="647"/>
+        <di:waypoint x="950" y="695"/>
+        <di:waypoint x="545" y="695"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge_F10" bpmnElement="F10">
+        <di:waypoint x="1032" y="620"/>
+        <di:waypoint x="1032" y="600"/>
+        <di:waypoint x="175" y="600"/>
+        <di:waypoint x="175" y="620"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge_F11" bpmnElement="F11">
+        <di:waypoint x="445" y="645"/>
+        <di:waypoint x="445" y="605"/>
+        <di:waypoint x="740" y="605"/>
+        <di:waypoint x="740" y="585"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge_F12" bpmnElement="F12">
+        <di:waypoint x="175" y="710"/>
+        <di:waypoint x="175" y="750"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge_F13" bpmnElement="F13">
+        <di:waypoint x="175" y="805"/>
+        <di:waypoint x="175" y="835"/>
+        <di:waypoint x="445" y="835"/>
+        <di:waypoint x="445" y="745"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge_F14" bpmnElement="F14">
+        <di:waypoint x="202" y="777"/>
+        <di:waypoint x="300" y="777"/>
+        <di:waypoint x="300" y="815"/>
+        <di:waypoint x="635" y="815"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge_F15" bpmnElement="F15">
+        <di:waypoint x="845" y="815"/>
+        <di:waypoint x="935" y="815"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge_F16" bpmnElement="F16">
+        <di:waypoint x="1145" y="815"/>
+        <di:waypoint x="1210" y="815"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge_F17" bpmnElement="F17">
+        <di:waypoint x="1295" y="855"/>
+        <di:waypoint x="1302" y="880"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge_F18" bpmnElement="F18">
+        <di:waypoint x="1275" y="902"/>
+        <di:waypoint x="1235" y="902"/>
+        <di:waypoint x="1235" y="915"/>
+        <di:waypoint x="1110" y="915"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge_F19" bpmnElement="F19">
+        <di:waypoint x="1020" y="870"/>
+        <di:waypoint x="1020" y="740"/>
+        <di:waypoint x="1295" y="740"/>
+        <di:waypoint x="1295" y="765"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge_F20" bpmnElement="F20">
+        <di:waypoint x="1330" y="902"/>
+        <di:waypoint x="1385" y="915"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge_F21" bpmnElement="F21">
+        <di:waypoint x="1545" y="915"/>
+        <di:waypoint x="1570" y="913"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge_F22" bpmnElement="F22">
+        <di:waypoint x="1050" y="211"/>
+        <di:waypoint x="1050" y="255"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge_F23" bpmnElement="F23">
+        <di:waypoint x="940" y="300"/>
+        <di:waypoint x="880" y="300"/>
+        <di:waypoint x="880" y="215"/>
+        <di:waypoint x="550" y="215"/>
+        <di:waypoint x="550" y="280"/>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>

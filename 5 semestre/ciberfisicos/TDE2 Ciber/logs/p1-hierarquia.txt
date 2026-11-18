@@ -1,0 +1,364 @@
+Filosofo 1: pensando
+Filosofo 2: pensando
+Filosofo 3: pensando
+Filosofo 0: pensando
+Filosofo 4: pensando
+Filosofo 2: com fome
+Filosofo 0: com fome
+Filosofo 4: com fome
+Filosofo 1: com fome
+Filosofo 3: com fome
+Filosofo 3: comendo
+Filosofo 3: pensando
+Filosofo 2: comendo
+Filosofo 1: comendo
+Filosofo 3: com fome
+Filosofo 2: pensando
+Filosofo 2: com fome
+Filosofo 1: pensando
+Filosofo 3: comendo
+Filosofo 0: comendo
+Filosofo 2: comendo
+Filosofo 3: pensando
+Filosofo 1: com fome
+Filosofo 0: pensando
+Filosofo 0: com fome
+Filosofo 4: comendo
+Filosofo 3: com fome
+Filosofo 1: comendo
+Filosofo 2: pensando
+Filosofo 1: pensando
+Filosofo 2: com fome
+Filosofo 4: pensando
+Filosofo 3: comendo
+Filosofo 0: comendo
+Filosofo 3: pensando
+Filosofo 4: com fome
+Filosofo 2: comendo
+Filosofo 1: com fome
+Filosofo 2: pensando
+Filosofo 0: pensando
+Filosofo 3: com fome
+Filosofo 3: comendo
+Filosofo 0: com fome
+Filosofo 2: com fome
+Filosofo 1: comendo
+Filosofo 1: pensando
+Filosofo 4: comendo
+Filosofo 3: pensando
+Filosofo 3: com fome
+Filosofo 2: comendo
+Filosofo 4: pensando
+Filosofo 1: com fome
+Filosofo 4: com fome
+Filosofo 1: comendo
+Filosofo 2: pensando
+Filosofo 2: com fome
+Filosofo 0: comendo
+Filosofo 1: pensando
+Filosofo 3: comendo
+Filosofo 0: pensando
+Filosofo 2: comendo
+Filosofo 3: pensando
+Filosofo 1: com fome
+Filosofo 0: com fome
+Filosofo 2: pensando
+Filosofo 1: comendo
+Filosofo 4: comendo
+Filosofo 3: com fome
+Filosofo 3: comendo
+Filosofo 4: pensando
+Filosofo 1: pensando
+Filosofo 2: com fome
+Filosofo 2: comendo
+Filosofo 4: com fome
+Filosofo 3: pensando
+Filosofo 1: com fome
+Filosofo 0: comendo
+Filosofo 3: com fome
+Filosofo 0: pensando
+Filosofo 2: pensando
+Filosofo 1: comendo
+Filosofo 3: comendo
+Filosofo 0: com fome
+Filosofo 2: com fome
+Filosofo 3: pensando
+Filosofo 1: pensando
+Filosofo 4: comendo
+Filosofo 1: com fome
+Filosofo 4: pensando
+Filosofo 3: com fome
+Filosofo 2: comendo
+Filosofo 2: pensando
+Filosofo 4: com fome
+Filosofo 1: comendo
+Filosofo 0: comendo
+Filosofo 1: pensando
+Filosofo 2: com fome
+Filosofo 3: comendo
+Filosofo 1: com fome
+Filosofo 3: pensando
+Filosofo 2: comendo
+Filosofo 0: pensando
+Filosofo 4: comendo
+Filosofo 1: comendo
+Filosofo 3: com fome
+Filosofo 2: pensando
+Filosofo 0: com fome
+Filosofo 2: com fome
+Filosofo 4: pensando
+Filosofo 3: comendo
+Filosofo 1: pensando
+Filosofo 3: pensando
+Filosofo 2: comendo
+Filosofo 1: com fome
+Filosofo 4: com fome
+Filosofo 3: com fome
+Filosofo 2: pensando
+Filosofo 1: comendo
+Filosofo 3: comendo
+Filosofo 0: comendo
+Filosofo 1: pensando
+Filosofo 2: com fome
+Filosofo 3: pensando
+Filosofo 0: pensando
+Filosofo 1: com fome
+Filosofo 2: comendo
+Filosofo 4: comendo
+Filosofo 3: com fome
+Filosofo 2: pensando
+Filosofo 0: com fome
+Filosofo 1: comendo
+Filosofo 1: pensando
+Filosofo 2: com fome
+Filosofo 4: pensando
+Filosofo 3: comendo
+Filosofo 3: pensando
+Filosofo 4: com fome
+Filosofo 0: comendo
+Filosofo 2: comendo
+Filosofo 1: com fome
+Filosofo 2: pensando
+Filosofo 0: pensando
+Filosofo 3: com fome
+Filosofo 0: com fome
+Filosofo 3: comendo
+Filosofo 2: com fome
+Filosofo 4: comendo
+Filosofo 2: comendo
+Filosofo 3: pensando
+Filosofo 3: com fome
+Filosofo 1: comendo
+Filosofo 2: pensando
+Filosofo 4: pensando
+Filosofo 4: com fome
+Filosofo 3: comendo
+Filosofo 2: com fome
+Filosofo 0: comendo
+Filosofo 1: pensando
+Filosofo 1: com fome
+Filosofo 0: pensando
+Filosofo 2: comendo
+Filosofo 3: pensando
+Filosofo 4: comendo
+Filosofo 0: com fome
+Filosofo 1: comendo
+Filosofo 2: pensando
+Filosofo 3: com fome
+Filosofo 1: pensando
+Filosofo 4: pensando
+Filosofo 2: com fome
+Filosofo 3: comendo
+Filosofo 0: comendo
+Filosofo 1: com fome
+Filosofo 4: com fome
+Filosofo 2: comendo
+Filosofo 3: pensando
+Filosofo 3: com fome
+Filosofo 0: pensando
+Filosofo 2: pensando
+Filosofo 4: comendo
+Filosofo 2: com fome
+Filosofo 0: com fome
+Filosofo 3: comendo
+Filosofo 4: pensando
+Filosofo 3: pensando
+Filosofo 2: comendo
+Filosofo 4: com fome
+Filosofo 1: comendo
+Filosofo 2: pensando
+Filosofo 3: com fome
+Filosofo 3: comendo
+Filosofo 2: com fome
+Filosofo 0: comendo
+Filosofo 1: pensando
+Filosofo 1: com fome
+Filosofo 0: pensando
+Filosofo 2: comendo
+Filosofo 3: pensando
+Filosofo 3: com fome
+Filosofo 2: pensando
+Filosofo 0: com fome
+Filosofo 1: comendo
+Filosofo 4: comendo
+Filosofo 4: pensando
+Filosofo 3: comendo
+Filosofo 1: pensando
+Filosofo 2: com fome
+Filosofo 1: com fome
+Filosofo 2: comendo
+Filosofo 3: pensando
+Filosofo 4: com fome
+Filosofo 3: com fome
+Filosofo 1: comendo
+Filosofo 2: pensando
+Filosofo 1: pensando
+Filosofo 0: comendo
+Filosofo 2: com fome
+Filosofo 3: comendo
+Filosofo 0: pensando
+Filosofo 2: comendo
+Filosofo 3: pensando
+Filosofo 1: com fome
+Filosofo 2: pensando
+Filosofo 4: comendo
+Filosofo 3: com fome
+Filosofo 1: comendo
+Filosofo 0: com fome
+Filosofo 1: pensando
+Filosofo 2: com fome
+Filosofo 4: pensando
+Filosofo 3: comendo
+Filosofo 3: pensando
+Filosofo 0: comendo
+Filosofo 4: com fome
+Filosofo 2: comendo
+Filosofo 1: com fome
+Filosofo 3: com fome
+Filosofo 2: pensando
+Filosofo 0: pensando
+Filosofo 0: com fome
+Filosofo 4: comendo
+Filosofo 1: comendo
+Filosofo 2: com fome
+Filosofo 1: pensando
+Filosofo 3: comendo
+Filosofo 4: pensando
+Filosofo 4: com fome
+Filosofo 0: comendo
+Filosofo 1: com fome
+Filosofo 2: comendo
+Filosofo 3: pensando
+Filosofo 0: pensando
+Filosofo 2: pensando
+Filosofo 3: com fome
+Filosofo 2: com fome
+Filosofo 3: comendo
+Filosofo 0: com fome
+Filosofo 1: comendo
+Filosofo 4: comendo
+Filosofo 3: pensando
+Filosofo 1: pensando
+Filosofo 1: com fome
+Filosofo 4: pensando
+Filosofo 2: comendo
+Filosofo 3: com fome
+Filosofo 2: pensando
+Filosofo 4: com fome
+Filosofo 1: comendo
+Filosofo 0: comendo
+Filosofo 1: pensando
+Filosofo 2: com fome
+Filosofo 3: comendo
+Filosofo 0: pensando
+Filosofo 2: comendo
+Filosofo 3: pensando
+Filosofo 1: com fome
+Filosofo 4: comendo
+Filosofo 2: pensando
+Filosofo 3: com fome
+Filosofo 1: comendo
+Filosofo 0: com fome
+Filosofo 2: com fome
+Filosofo 1: pensando
+Filosofo 3: comendo
+Filosofo 4: pensando
+Filosofo 1: com fome
+Filosofo 2: comendo
+Filosofo 3: pensando
+Filosofo 0: comendo
+Filosofo 4: com fome
+Filosofo 3: com fome
+Filosofo 0: pensando
+Filosofo 2: pensando
+Filosofo 4: comendo
+Filosofo 2: com fome
+Filosofo 0: com fome
+Filosofo 1: comendo
+Filosofo 1: pensando
+Filosofo 3: comendo
+Filosofo 4: pensando
+Filosofo 1: com fome
+Filosofo 2: comendo
+Filosofo 3: pensando
+Filosofo 0: comendo
+Filosofo 4: com fome
+Filosofo 0: pensando
+Filosofo 3: com fome
+Filosofo 2: pensando
+Filosofo 3: comendo
+Filosofo 2: com fome
+Filosofo 0: com fome
+Filosofo 3: pensando
+Filosofo 4: comendo
+Filosofo 2: comendo
+Filosofo 1: comendo
+Filosofo 2: pensando
+Filosofo 4: pensando
+Filosofo 3: com fome
+Filosofo 1: pensando
+Filosofo 2: com fome
+Filosofo 0: comendo
+Filosofo 4: com fome
+Filosofo 3: comendo
+Filosofo 1: com fome
+Filosofo 0: pensando
+Filosofo 3: pensando
+Filosofo 2: comendo
+Filosofo 1: comendo
+Filosofo 2: pensando
+Filosofo 3: com fome
+Filosofo 0: com fome
+Filosofo 4: comendo
+Filosofo 3: comendo
+Filosofo 4: pensando
+Filosofo 2: com fome
+Filosofo 1: pensando
+Filosofo 1: com fome
+Filosofo 3: pensando
+Filosofo 4: com fome
+Filosofo 2: comendo
+Filosofo 3: com fome
+Filosofo 1: comendo
+Filosofo 2: pensando
+Filosofo 3: comendo
+Filosofo 2: com fome
+Filosofo 0: comendo
+Filosofo 1: pensando
+Filosofo 1: com fome
+Filosofo 0: pensando
+Filosofo 3: pensando
+Filosofo 2: comendo
+Filosofo 4: comendo
+Filosofo 0: com fome
+Filosofo 3: com fome
+Filosofo 1: comendo
+Filosofo 3: comendo
+Filosofo 0: comendo
+
+Fim, sem deadlock. Refeicoes de cada filosofo:
+Filosofo 0: 19
+Filosofo 1: 25
+Filosofo 2: 28
+Filosofo 3: 29
+Filosofo 4: 18

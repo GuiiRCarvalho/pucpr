@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:color="http://www.omg.org/spec/BPMN/non-normative/color/1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Definitions_MED4" targetNamespace="http://bpmn.io/schema/bpmn" name="MED 4 - Análise das medidas e armazenamento dos resultados (AS-IS)" exporter="Claude" exporterVersion="1.0">
+  <bpmn:collaboration id="Collab_MED4">
+    <bpmn:participant id="MED4_PoolCli" name="Direção / Partes Interessadas" processRef="MED4_ProcCli"/>
+    <bpmn:participant id="MED4_PoolOrg" name="Organização" processRef="MED4_ProcOrg"/>
+    <bpmn:messageFlow id="MED4_MF0" name="Solicitação de análise de desempenho" sourceRef="MED4_cSend" targetRef="MED4_s"/>
+  </bpmn:collaboration>
+  <bpmn:process id="MED4_ProcCli" isExecutable="false">
+    <bpmn:startEvent id="MED4_cStart" name="Necessidade de análise identificada">
+      <bpmn:outgoing>MED4_SF0</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sendTask id="MED4_cSend" name="Solicitar análise de desempenho">
+      <bpmn:incoming>MED4_SF0</bpmn:incoming>
+      <bpmn:outgoing>MED4_SF1</bpmn:outgoing>
+    </bpmn:sendTask>
+    <bpmn:endEvent id="MED4_cEnd" name="Solicitação comunicada">
+      <bpmn:incoming>MED4_SF1</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="MED4_SF0" sourceRef="MED4_cStart" targetRef="MED4_cSend"/>
+    <bpmn:sequenceFlow id="MED4_SF1" sourceRef="MED4_cSend" targetRef="MED4_cEnd"/>
+  </bpmn:process>
+  <bpmn:process id="MED4_ProcOrg" isExecutable="false">
+    <bpmn:documentation>Resultado esperado: MED 4 (A partir do nível F) Medidas são analisadas e os resultados da análise são armazenados de acordo com as definições operacionais. NOTA 1: (item informativo) Nesse nível, a análise de medida é realizada em nível de projeto/serviço.</bpmn:documentation>
+    <bpmn:laneSet id="MED4_LaneSet">
+      <bpmn:lane id="MED4_Lane0" name="Gestão / Responsável pelas Medições">
+        <bpmn:flowNodeRef>MED4_s</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>MED4_n2</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>MED4_n7</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>MED4_n8</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="MED4_Lane1" name="Equipe do Projeto / Serviço">
+        <bpmn:flowNodeRef>MED4_t1</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>MED4_n4</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>MED4_n5</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>MED4_n5_L</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>MED4_n6</bpmn:flowNodeRef>
+      </bpmn:lane>
+    </bpmn:laneSet>
+    <bpmn:startEvent id="MED4_s" name="Solicitação de análise recebida">
+      <bpmn:outgoing>MED4_SF2</bpmn:outgoing>
+      <bpmn:messageEventDefinition id="MED4_s_med"/>
+    </bpmn:startEvent>
+    <bpmn:task id="MED4_n2" name="Solicitar análise dos dados à equipe">
+      <bpmn:incoming>MED4_SF2</bpmn:incoming>
+      <bpmn:outgoing>MED4_SF3</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="MED4_t1" name="Consolidar dados coletados">
+      <bpmn:incoming>MED4_SF3</bpmn:incoming>
+      <bpmn:incoming>MED4_SF7</bpmn:incoming>
+      <bpmn:outgoing>MED4_SF4</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="MED4_n4" name="Analisar dados de modo informal, sem técnica de medição">
+      <bpmn:incoming>MED4_SF4</bpmn:incoming>
+      <bpmn:outgoing>MED4_SF5</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:exclusiveGateway id="MED4_n5" name="Resultado da análise conclusivo?" gatewayDirection="Diverging">
+      <bpmn:incoming>MED4_SF5</bpmn:incoming>
+      <bpmn:outgoing>MED4_SF6</bpmn:outgoing>
+      <bpmn:outgoing>MED4_SF8</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:task id="MED4_n5_L" name="Rever dados pontualmente">
+      <bpmn:incoming>MED4_SF6</bpmn:incoming>
+      <bpmn:outgoing>MED4_SF7</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="MED4_n6" name="Registrar resultado da análise de forma pontual">
+      <bpmn:incoming>MED4_SF8</bpmn:incoming>
+      <bpmn:outgoing>MED4_SF9</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="MED4_n7" name="Apresentar resultado verbalmente à gestão">
+      <bpmn:incoming>MED4_SF9</bpmn:incoming>
+      <bpmn:outgoing>MED4_SF10</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:endEvent id="MED4_n8" name="Análise concluída conforme prática atual">
+      <bpmn:incoming>MED4_SF10</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="MED4_SF2" sourceRef="MED4_s" targetRef="MED4_n2"/>
+    <bpmn:sequenceFlow id="MED4_SF3" sourceRef="MED4_n2" targetRef="MED4_t1"/>
+    <bpmn:sequenceFlow id="MED4_SF4" sourceRef="MED4_t1" targetRef="MED4_n4"/>
+    <bpmn:sequenceFlow id="MED4_SF5" sourceRef="MED4_n4" targetRef="MED4_n5"/>
+    <bpmn:sequenceFlow id="MED4_SF6" name="Não" sourceRef="MED4_n5" targetRef="MED4_n5_L"/>
+    <bpmn:sequenceFlow id="MED4_SF7" sourceRef="MED4_n5_L" targetRef="MED4_t1"/>
+    <bpmn:sequenceFlow id="MED4_SF8" name="Sim" sourceRef="MED4_n5" targetRef="MED4_n6"/>
+    <bpmn:sequenceFlow id="MED4_SF9" sourceRef="MED4_n6" targetRef="MED4_n7"/>
+    <bpmn:sequenceFlow id="MED4_SF10" sourceRef="MED4_n7" targetRef="MED4_n8"/>
+    <bpmn:textAnnotation id="MED4_A_n4"><bpmn:text>MED 4 — Não utilizam nenhuma técnica de medição formal.</bpmn:text></bpmn:textAnnotation>
+    <bpmn:association id="MED4_A_n4_as0" associationDirection="None" sourceRef="MED4_n4" targetRef="MED4_A_n4"/>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="Diagram_MED4" name="MED 4 - Análise das medidas e armazenamento dos resultados (AS-IS)">
+    <bpmndi:BPMNPlane id="Plane_MED4" bpmnElement="Collab_MED4">
+      <bpmndi:BPMNShape id="MED4_PoolCli_di" bpmnElement="MED4_PoolCli" isHorizontal="true" color:background-color="#FFFFFF" color:border-color="#8E8AB5">
+        <dc:Bounds x="30" y="30" width="1560" height="150"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="MED4_PoolOrg_di" bpmnElement="MED4_PoolOrg" isHorizontal="true" color:background-color="#FFFFFF" color:border-color="#8E8AB5">
+        <dc:Bounds x="30" y="260" width="1560" height="680"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="MED4_Lane0_di" bpmnElement="MED4_Lane0" isHorizontal="true" color:background-color="#F3F7FE" color:border-color="#8E8AB5">
+        <dc:Bounds x="60" y="260" width="1530" height="340"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="MED4_Lane1_di" bpmnElement="MED4_Lane1" isHorizontal="true" color:background-color="#F3FAF4" color:border-color="#8E8AB5">
+        <dc:Bounds x="60" y="600" width="1530" height="340"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="MED4_cStart_di" bpmnElement="MED4_cStart" color:background-color="#BDEDE6" color:border-color="#2A9D8F">
+        <dc:Bounds x="132" y="87" width="36" height="36"/>
+        <bpmndi:BPMNLabel><dc:Bounds x="95" y="127" width="110" height="40"/></bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="MED4_cSend_di" bpmnElement="MED4_cSend" color:background-color="#CFE2F7" color:border-color="#2F6DB5">
+        <dc:Bounds x="280" y="65" width="120" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="MED4_cEnd_di" bpmnElement="MED4_cEnd" color:background-color="#F8C1D0" color:border-color="#C2185B">
+        <dc:Bounds x="512" y="87" width="36" height="36"/>
+        <bpmndi:BPMNLabel><dc:Bounds x="475" y="127" width="110" height="40"/></bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="MED4_s_di" bpmnElement="MED4_s" color:background-color="#BDEDE6" color:border-color="#2A9D8F">
+        <dc:Bounds x="132" y="427" width="36" height="36"/>
+        <bpmndi:BPMNLabel><dc:Bounds x="95" y="467" width="110" height="40"/></bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="MED4_n2_di" bpmnElement="MED4_n2" color:background-color="#CFE2F7" color:border-color="#2F6DB5">
+        <dc:Bounds x="280" y="405" width="120" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="MED4_t1_di" bpmnElement="MED4_t1" color:background-color="#CFE2F7" color:border-color="#2F6DB5">
+        <dc:Bounds x="470" y="745" width="120" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="MED4_n4_di" bpmnElement="MED4_n4" color:background-color="#CFE2F7" color:border-color="#2F6DB5">
+        <dc:Bounds x="660" y="745" width="120" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="MED4_n5_di" bpmnElement="MED4_n5" isMarkerVisible="true" color:background-color="#FFF3C4" color:border-color="#C99A1B">
+        <dc:Bounds x="885" y="760" width="50" height="50"/>
+        <bpmndi:BPMNLabel><dc:Bounds x="850" y="716" width="120" height="40"/></bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="MED4_n5_L_di" bpmnElement="MED4_n5_L" color:background-color="#CFE2F7" color:border-color="#2F6DB5">
+        <dc:Bounds x="850" y="850" width="120" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="MED4_n6_di" bpmnElement="MED4_n6" color:background-color="#CFE2F7" color:border-color="#2F6DB5">
+        <dc:Bounds x="1040" y="745" width="120" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="MED4_n7_di" bpmnElement="MED4_n7" color:background-color="#CFE2F7" color:border-color="#2F6DB5">
+        <dc:Bounds x="1230" y="405" width="120" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="MED4_n8_di" bpmnElement="MED4_n8" color:background-color="#F8C1D0" color:border-color="#C2185B">
+        <dc:Bounds x="1462" y="427" width="36" height="36"/>
+        <bpmndi:BPMNLabel><dc:Bounds x="1425" y="467" width="110" height="40"/></bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="MED4_A_n4_di" bpmnElement="MED4_A_n4" color:background-color="#FDE7E7" color:border-color="#D9534F">
+        <dc:Bounds x="635" y="618" width="170" height="61"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="MED4_SF0_di" bpmnElement="MED4_SF0">
+        <di:waypoint x="168" y="105"/>
+        <di:waypoint x="280" y="105"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="MED4_SF1_di" bpmnElement="MED4_SF1">
+        <di:waypoint x="400" y="105"/>
+        <di:waypoint x="512" y="105"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="MED4_SF2_di" bpmnElement="MED4_SF2">
+        <di:waypoint x="168" y="445"/>
+        <di:waypoint x="280" y="445"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="MED4_SF3_di" bpmnElement="MED4_SF3">
+        <di:waypoint x="400" y="445"/>
+        <di:waypoint x="435" y="445"/>
+        <di:waypoint x="435" y="785"/>
+        <di:waypoint x="470" y="785"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="MED4_SF4_di" bpmnElement="MED4_SF4">
+        <di:waypoint x="590" y="785"/>
+        <di:waypoint x="660" y="785"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="MED4_SF5_di" bpmnElement="MED4_SF5">
+        <di:waypoint x="780" y="785"/>
+        <di:waypoint x="885" y="785"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="MED4_SF6_di" bpmnElement="MED4_SF6">
+        <di:waypoint x="910" y="810"/>
+        <di:waypoint x="910" y="850"/>
+        <bpmndi:BPMNLabel><dc:Bounds x="917" y="813" width="30" height="14"/></bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="MED4_SF7_di" bpmnElement="MED4_SF7">
+        <di:waypoint x="850" y="890"/>
+        <di:waypoint x="530" y="890"/>
+        <di:waypoint x="530" y="825"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="MED4_SF8_di" bpmnElement="MED4_SF8">
+        <di:waypoint x="935" y="785"/>
+        <di:waypoint x="1040" y="785"/>
+        <bpmndi:BPMNLabel><dc:Bounds x="937" y="763" width="30" height="14"/></bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="MED4_SF9_di" bpmnElement="MED4_SF9">
+        <di:waypoint x="1160" y="785"/>
+        <di:waypoint x="1195" y="785"/>
+        <di:waypoint x="1195" y="445"/>
+        <di:waypoint x="1230" y="445"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="MED4_SF10_di" bpmnElement="MED4_SF10">
+        <di:waypoint x="1350" y="445"/>
+        <di:waypoint x="1462" y="445"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="MED4_A_n4_as0_di" bpmnElement="MED4_A_n4_as0">
+        <di:waypoint x="720" y="679"/>
+        <di:waypoint x="720" y="745"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="MED4_MF0_di" bpmnElement="MED4_MF0">
+        <di:waypoint x="340" y="145"/>
+        <di:waypoint x="340" y="205"/>
+        <di:waypoint x="150" y="205"/>
+        <di:waypoint x="150" y="427"/>
+        <bpmndi:BPMNLabel><dc:Bounds x="200" y="208" width="150" height="32"/></bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

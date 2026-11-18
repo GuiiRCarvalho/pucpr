@@ -1,0 +1,235 @@
+' QuickBite — diagramas UML
+' Arquivo-fonte PlantUML. Renderize cada bloco @startuml separadamente.
+
+@startuml QuickBite_Nivel_1_Contexto
+title QuickBite — Nível 1: Contexto do sistema
+left to right direction
+skinparam packageStyle rectangle
+
+actor Cliente
+actor "Restaurante parceiro" as Restaurante
+actor Entregador
+actor Administrador
+cloud "Sistema de pagamento" as Pagamento
+cloud "Serviço de mapas" as Mapas
+cloud "Serviço de notificações" as Notificacoes
+
+rectangle "QuickBite\nPlataforma de delivery" as QuickBite {
+  usecase "Pesquisar restaurantes" as UC1
+  usecase "Realizar pedido" as UC2
+  usecase "Acompanhar entrega" as UC3
+}
+
+Cliente --> UC1
+Cliente --> UC2
+Cliente --> UC3
+Restaurante --> UC2 : gerencia pedidos
+Entregador --> UC3 : atualiza status
+Administrador --> QuickBite : configura e presta suporte
+QuickBite --> Pagamento : autoriza / estorna
+QuickBite --> Mapas : calcula rota
+QuickBite --> Notificacoes : envia mensagens
+@enduml
+
+@startuml QuickBite_Nivel_2_Containers
+title QuickBite — Nível 2: Containers da solução
+left to right direction
+skinparam componentStyle rectangle
+
+package "Canais de acesso" {
+  [App/Web do cliente] as AppCliente
+  [Portal do restaurante] as PortalRestaurante
+  [App do entregador] as AppEntregador
+  [Painel administrativo] as PainelAdmin
+}
+
+component "API Gateway" as Gateway
+component "Serviço de autenticação" as Auth
+component "Serviço de pedidos" as Pedidos
+component "Serviço de catálogo" as Catalogo
+component "Serviço de entregas" as Entregas
+component "Serviço de pagamentos" as Pagamentos
+component "Serviço de notificações" as Notificacoes
+database "Banco transacional" as Banco
+database "Cache" as Cache
+queue "Fila de eventos" as Fila
+cloud "Gateway de pagamento externo" as GatewayPagamento
+cloud "API de mapas externa" as APIMapas
+
+AppCliente --> Gateway
+PortalRestaurante --> Gateway
+AppEntregador --> Gateway
+PainelAdmin --> Gateway
+Gateway --> Auth
+Gateway --> Pedidos
+Gateway --> Catalogo
+Gateway --> Entregas
+Gateway --> Pagamentos
+Auth --> Banco
+Catalogo --> Banco
+Catalogo --> Cache
+Pedidos --> Banco
+Pedidos --> Fila
+Entregas --> Banco
+Entregas --> Fila
+Entregas --> APIMapas
+Pagamentos --> Banco
+Pagamentos --> GatewayPagamento
+Fila --> Notificacoes
+@enduml
+
+@startuml QuickBite_Nivel_3_Componentes
+title QuickBite — Nível 3: Componentes do Serviço de Pedidos
+left to right direction
+
+component "OrdersController\nAPI REST" as Controller
+component "OrderValidator\nRegras de validação" as Validator
+component "OrderApplicationService\nCasos de uso" as Service
+component "PricingComponent\nCálculo do pedido" as Pricing
+component "OrderRepository\nPersistência" as Repository
+component "OrderEventPublisher\nEventos" as Publisher
+component "OrderQueryService\nConsultas" as Query
+database "Orders DB" as OrdersDB
+queue "Event Bus" as EventBus
+
+Controller --> Validator : criar pedido
+Validator --> Service
+Service --> Pricing
+Service --> Repository
+Repository --> OrdersDB
+Service --> Publisher
+Publisher --> EventBus
+Controller --> Query : consultar status
+Query --> OrdersDB
+@enduml
+
+@startuml QuickBite_Diagrama_Classes
+title QuickBite — UML: Diagrama de classes
+
+class Cliente {
+  -id: UUID
+  -nome: String
+  -email: String
+  +realizarPedido(): Pedido
+}
+
+class Restaurante {
+  -id: UUID
+  -nome: String
+  -status: StatusRestaurante
+  +aceitarPedido(pedido: Pedido)
+}
+
+class Entregador {
+  -id: UUID
+  -nome: String
+  -disponivel: Boolean
+  +atualizarStatus(status: StatusEntrega)
+}
+
+class Pedido {
+  -id: UUID
+  -criadoEm: DateTime
+  -status: StatusPedido
+  -total: Decimal
+  +confirmar()
+  +cancelar()
+}
+
+class ItemPedido {
+  -quantidade: Integer
+  -precoUnitario: Decimal
+  +calcularSubtotal(): Decimal
+}
+
+class Produto {
+  -id: UUID
+  -nome: String
+  -preco: Decimal
+  -disponivel: Boolean
+}
+
+class Pagamento {
+  -id: UUID
+  -valor: Decimal
+  -status: StatusPagamento
+  +autorizar()
+  +estornar()
+}
+
+class Entrega {
+  -id: UUID
+  -endereco: String
+  -status: StatusEntrega
+  +calcularRota()
+}
+
+Cliente "1" --> "0..*" Pedido : realiza
+Restaurante "1" --> "0..*" Produto : oferece
+Pedido "1" *-- "1..*" ItemPedido
+ItemPedido "*" --> "1" Produto
+Pedido "1" --> "1" Pagamento
+Pedido "1" --> "0..1" Entrega
+Entregador "1" --> "0..*" Entrega : executa
+Restaurante "1" --> "0..*" Pedido : recebe
+@enduml
+
+@startuml QuickBite_Diagrama_Sequencia
+title QuickBite — UML: Diagrama de sequência de criação do pedido
+
+actor Cliente
+participant "App do cliente" as App
+participant "API Gateway" as Gateway
+participant "Serviço de pedidos" as Pedidos
+participant "Gateway de pagamento" as Pagamento
+database "Banco de dados" as Banco
+queue "Event Bus" as Eventos
+
+Cliente -> App : seleciona itens e confirma
+App -> Gateway : POST /pedidos
+Gateway -> Pedidos : criarPedido(dados)
+Pedidos -> Pedidos : valida e calcula total
+Pedidos -> Pagamento : autorizar(total)
+Pagamento --> Pedidos : pagamento aprovado
+Pedidos -> Banco : salvar pedido
+Banco --> Pedidos : pedido salvo
+Pedidos -> Eventos : publicar PedidoCriado
+Pedidos --> Gateway : pedido confirmado
+Gateway --> App : HTTP 201 + status
+App --> Cliente : exibe confirmação
+@enduml
+
+@startuml QuickBite_Diagrama_Deployment
+title QuickBite — UML: Diagrama de deployment
+
+node "Dispositivo do cliente" as ClienteDevice {
+  artifact "App/Web" as App
+}
+
+node "Nuvem QuickBite" as Cloud {
+  node "Cluster de aplicação" as Cluster {
+    artifact "API Gateway" as Gateway
+    artifact "Serviços de negócio" as Services
+    artifact "Worker de eventos" as Worker
+  }
+  database "Banco PostgreSQL" as DB
+  database "Cache Redis" as Redis
+  queue "Broker de mensagens" as Broker
+}
+
+cloud "Provedores externos" as External {
+  artifact "Pagamento" as ExternalPayment
+  artifact "Mapas" as ExternalMaps
+  artifact "Notificações" as ExternalNotifications
+}
+
+App --> Gateway : HTTPS
+Gateway --> Services : HTTP interno
+Services --> DB : SQL
+Services --> Redis : cache
+Services --> Broker : eventos
+Worker --> Broker : consome eventos
+Services --> ExternalPayment : HTTPS
+Services --> ExternalMaps : HTTPS
+Worker --> ExternalNotifications : HTTPS
+@enduml

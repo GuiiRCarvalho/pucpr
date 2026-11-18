@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_Process_GDE_Nivel_F" targetNamespace="http://bpmn.io/schema/bpmn">
+  <bpmn:collaboration id="Collaboration_Process_GDE_Nivel_F">
+    <bpmn:participant id="participant_Process_GDE_Nivel_F" name="Lumen Software — Gerência de Decisões" processRef="Process_GDE_Nivel_F"/>
+  </bpmn:collaboration>
+  <bpmn:process id="Process_GDE_Nivel_F" name="Gerência de Decisões - Nível F" isExecutable="false">
+    <bpmn:documentation>Modelo BPMN de referência até o nível F, construído sobre as evidências atuais da empresa. O fluxo preserva a entrada informal observada e explicita GDE 1 a GDE 6 para formalização da tomada de decisão.</bpmn:documentation>
+    <bpmn:laneSet id="LaneSet_Process_GDE_Nivel_F">
+      <bpmn:lane id="gde_l1" name="Solicitante / Equipe">
+        <bpmn:flowNodeRef>gde_start</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>gde_t1</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>gde_g2</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>gde_t2</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="gde_l2" name="Gestor / Tomador de decisão">
+        <bpmn:flowNodeRef>gde_g1</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>gde_t3</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>gde_t5</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>gde_t6</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>gde_end</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="gde_l3" name="Equipe técnica / Especialistas">
+        <bpmn:flowNodeRef>gde_t4</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>gde_g3</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="gde_l4" name="Registro / Comunicação">
+        <bpmn:flowNodeRef>gde_t7</bpmn:flowNodeRef>
+      </bpmn:lane>
+    </bpmn:laneSet>
+    <bpmn:startEvent id="gde_start" name="Problema ou decisão crítica identificada">
+      <bpmn:outgoing>gde_f1</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:exclusiveGateway id="gde_g1" name="Decisão requer processo formal?">
+      <bpmn:incoming>gde_f1</bpmn:incoming>
+      <bpmn:outgoing>gde_f2</bpmn:outgoing>
+      <bpmn:outgoing>gde_f3</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:task id="gde_t1" name="[GDE 1] Aplicar diretrizes, papéis e autoridade">
+      <bpmn:incoming>gde_f2</bpmn:incoming>
+      <bpmn:outgoing>gde_f4</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="gde_t2" name="[GDE 2] Definir problema ou questão">
+      <bpmn:incoming>gde_f4</bpmn:incoming>
+      <bpmn:incoming>gde_f7</bpmn:incoming>
+      <bpmn:outgoing>gde_f5</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:exclusiveGateway id="gde_g2" name="Definição validada?">
+      <bpmn:incoming>gde_f5</bpmn:incoming>
+      <bpmn:outgoing>gde_f6</bpmn:outgoing>
+      <bpmn:outgoing>gde_f7</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:task id="gde_t3" name="[GDE 3] Identificar e registrar alternativas">
+      <bpmn:incoming>gde_f6</bpmn:incoming>
+      <bpmn:incoming>gde_f13</bpmn:incoming>
+      <bpmn:outgoing>gde_f8</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="gde_t4" name="[GDE 4] Definir critérios de avaliação">
+      <bpmn:incoming>gde_f8</bpmn:incoming>
+      <bpmn:outgoing>gde_f9</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="gde_t5" name="[GDE 5] Selecionar método de avaliação">
+      <bpmn:incoming>gde_f9</bpmn:incoming>
+      <bpmn:outgoing>gde_f10</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="gde_t6" name="[GDE 6] Avaliar alternativas e registrar decisão">
+      <bpmn:incoming>gde_f10</bpmn:incoming>
+      <bpmn:outgoing>gde_f11</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:exclusiveGateway id="gde_g3" name="Alternativa recomendada?">
+      <bpmn:incoming>gde_f11</bpmn:incoming>
+      <bpmn:outgoing>gde_f12</bpmn:outgoing>
+      <bpmn:outgoing>gde_f13</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:task id="gde_t7" name="Comunicar decisão e responsáveis">
+      <bpmn:incoming>gde_f3</bpmn:incoming>
+      <bpmn:incoming>gde_f12</bpmn:incoming>
+      <bpmn:outgoing>gde_f14</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:endEvent id="gde_end" name="Decisão registrada">
+      <bpmn:incoming>gde_f14</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="gde_f1" name="" sourceRef="gde_start" targetRef="gde_g1">
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="gde_f2" name="Sim" sourceRef="gde_g1" targetRef="gde_t1">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">Sim</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="gde_f3" name="Não" sourceRef="gde_g1" targetRef="gde_t7">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">Não</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="gde_f4" name="" sourceRef="gde_t1" targetRef="gde_t2">
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="gde_f5" name="" sourceRef="gde_t2" targetRef="gde_g2">
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="gde_f6" name="Sim" sourceRef="gde_g2" targetRef="gde_t3">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">Sim</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="gde_f7" name="Não" sourceRef="gde_g2" targetRef="gde_t2">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">Não</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="gde_f8" name="" sourceRef="gde_t3" targetRef="gde_t4">
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="gde_f9" name="" sourceRef="gde_t4" targetRef="gde_t5">
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="gde_f10" name="" sourceRef="gde_t5" targetRef="gde_t6">
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="gde_f11" name="" sourceRef="gde_t6" targetRef="gde_g3">
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="gde_f12" name="Sim" sourceRef="gde_g3" targetRef="gde_t7">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">Sim</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="gde_f13" name="Não" sourceRef="gde_g3" targetRef="gde_t3">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">Não</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="gde_f14" name="" sourceRef="gde_t7" targetRef="gde_end">
+    </bpmn:sequenceFlow>
+    <bpmn:textAnnotation id="gde_note"><bpmn:text>Base atual: a equipe discute problemas e alternativas de modo informal. A planilha registra ausência de diretrizes, critérios, métodos e registros formais; o fluxo abaixo organiza esses pontos até o nível F.</bpmn:text></bpmn:textAnnotation>
+    <bpmn:association id="assoc_gde_note" sourceRef="gde_g1" targetRef="gde_note" associationDirection="One"/>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_Process_GDE_Nivel_F">
+    <bpmndi:BPMNPlane id="BPMNPlane_Process_GDE_Nivel_F" bpmnElement="Collaboration_Process_GDE_Nivel_F">
+      <bpmndi:BPMNShape id="BPMNShape_participant_Process_GDE_Nivel_F" bpmnElement="participant_Process_GDE_Nivel_F" isHorizontal="true"><dc:Bounds x="80" y="100" width="2300" height="600"/></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_gde_l1" bpmnElement="gde_l1" isHorizontal="true"><dc:Bounds x="120" y="100" width="2300" height="150"/></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_gde_l2" bpmnElement="gde_l2" isHorizontal="true"><dc:Bounds x="120" y="250" width="2300" height="150"/></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_gde_l3" bpmnElement="gde_l3" isHorizontal="true"><dc:Bounds x="120" y="400" width="2300" height="150"/></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_gde_l4" bpmnElement="gde_l4" isHorizontal="true"><dc:Bounds x="120" y="550" width="2300" height="150"/></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_gde_start" bpmnElement="gde_start"><dc:Bounds x="160" y="157" width="36" height="36"/></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_gde_g1" bpmnElement="gde_g1"><dc:Bounds x="300" y="145" width="50" height="50"/></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_gde_t1" bpmnElement="gde_t1"><dc:Bounds x="420" y="285" width="200" height="70"/></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_gde_t2" bpmnElement="gde_t2"><dc:Bounds x="680" y="135" width="180" height="70"/></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_gde_g2" bpmnElement="gde_g2"><dc:Bounds x="900" y="145" width="50" height="50"/></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_gde_t3" bpmnElement="gde_t3"><dc:Bounds x="1030" y="285" width="190" height="70"/></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_gde_t4" bpmnElement="gde_t4"><dc:Bounds x="1270" y="435" width="180" height="70"/></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_gde_t5" bpmnElement="gde_t5"><dc:Bounds x="1500" y="285" width="180" height="70"/></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_gde_t6" bpmnElement="gde_t6"><dc:Bounds x="1730" y="285" width="200" height="70"/></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_gde_g3" bpmnElement="gde_g3"><dc:Bounds x="1970" y="445" width="50" height="50"/></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_gde_t7" bpmnElement="gde_t7"><dc:Bounds x="2040" y="585" width="180" height="70"/></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_gde_end" bpmnElement="gde_end"><dc:Bounds x="2260" y="307" width="36" height="36"/></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_gde_note" bpmnElement="gde_note"><dc:Bounds x="430" y="30" width="570" height="70"/></bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="BPMNEdge_gde_f1" bpmnElement="gde_f1"><di:waypoint x="196" y="175"/><di:waypoint x="300" y="170"/></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_gde_f2" bpmnElement="gde_f2"><di:waypoint x="325" y="170"/><di:waypoint x="360" y="170"/><di:waypoint x="360" y="320"/><di:waypoint x="420" y="320"/></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_gde_f3" bpmnElement="gde_f3"><di:waypoint x="325" y="195"/><di:waypoint x="325" y="620"/><di:waypoint x="2040" y="620"/></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_gde_f4" bpmnElement="gde_f4"><di:waypoint x="620" y="320"/><di:waypoint x="650" y="320"/><di:waypoint x="650" y="170"/><di:waypoint x="680" y="170"/></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_gde_f5" bpmnElement="gde_f5"><di:waypoint x="860" y="170"/><di:waypoint x="900" y="170"/></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_gde_f6" bpmnElement="gde_f6"><di:waypoint x="950" y="170"/><di:waypoint x="980" y="170"/><di:waypoint x="980" y="320"/><di:waypoint x="1030" y="320"/></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_gde_f7" bpmnElement="gde_f7"><di:waypoint x="925" y="195"/><di:waypoint x="925" y="360"/><di:waypoint x="770" y="360"/><di:waypoint x="770" y="205"/></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_gde_f8" bpmnElement="gde_f8"><di:waypoint x="1220" y="320"/><di:waypoint x="1250" y="320"/><di:waypoint x="1250" y="470"/><di:waypoint x="1270" y="470"/></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_gde_f9" bpmnElement="gde_f9"><di:waypoint x="1450" y="470"/><di:waypoint x="1470" y="470"/><di:waypoint x="1470" y="320"/><di:waypoint x="1500" y="320"/></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_gde_f10" bpmnElement="gde_f10"><di:waypoint x="1680" y="320"/><di:waypoint x="1730" y="320"/></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_gde_f11" bpmnElement="gde_f11"><di:waypoint x="1930" y="320"/><di:waypoint x="1995" y="320"/><di:waypoint x="1995" y="445"/></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_gde_f12" bpmnElement="gde_f12"><di:waypoint x="2020" y="495"/><di:waypoint x="2020" y="620"/><di:waypoint x="2040" y="620"/></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_gde_f13" bpmnElement="gde_f13"><di:waypoint x="1970" y="470"/><di:waypoint x="1920" y="470"/><di:waypoint x="1920" y="680"/><di:waypoint x="1110" y="680"/><di:waypoint x="1110" y="355"/></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_gde_f14" bpmnElement="gde_f14"><di:waypoint x="2220" y="620"/><di:waypoint x="2240" y="620"/><di:waypoint x="2240" y="332"/><di:waypoint x="2260" y="332"/></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_assoc_gde_note" bpmnElement="assoc_gde_note"><di:waypoint x="325" y="170"/><di:waypoint x="715" y="65"/></bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

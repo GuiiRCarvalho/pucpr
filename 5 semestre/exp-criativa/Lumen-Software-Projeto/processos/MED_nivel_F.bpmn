@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_Process_MED_Nivel_F" targetNamespace="http://bpmn.io/schema/bpmn">
+  <bpmn:collaboration id="Collaboration_Process_MED_Nivel_F">
+    <bpmn:participant id="participant_Process_MED_Nivel_F" name="Lumen Software — Medição" processRef="Process_MED_Nivel_F"/>
+  </bpmn:collaboration>
+  <bpmn:process id="Process_MED_Nivel_F" name="Medição - Nível F" isExecutable="false">
+    <bpmn:documentation>Modelo BPMN de referência até o nível F, construído sobre as evidências atuais da empresa. O Jira e o GitHub são as fontes observadas; as atividades MED 1 a MED 5 estão identificadas para explicitar o fluxo necessário e as lacunas atuais.</bpmn:documentation>
+    <bpmn:laneSet id="LaneSet_Process_MED_Nivel_F">
+      <bpmn:lane id="med_l1" name="Gestão / Solicitante">
+        <bpmn:flowNodeRef>med_start</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>med_t1</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>med_g2</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>med_end</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="med_l2" name="Responsável por medição">
+        <bpmn:flowNodeRef>med_t2</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>med_t3</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>med_t6</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>med_t7</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="med_l3" name="Equipe do projeto">
+        <bpmn:flowNodeRef>med_t4</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>med_t5</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>med_g1</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>med_t9</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="med_l4" name="Gestor do projeto">
+        <bpmn:flowNodeRef>med_t8</bpmn:flowNodeRef>
+      </bpmn:lane>
+    </bpmn:laneSet>
+    <bpmn:startEvent id="med_start" name="Necessidade de informação ou acompanhamento">
+      <bpmn:outgoing>med_f1</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:task id="med_t1" name="[MED 1] Definir objetivos de medição e desempenho">
+      <bpmn:incoming>med_f1</bpmn:incoming>
+      <bpmn:outgoing>med_f2</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="med_t2" name="[MED 2] Definir medidas e definições operacionais">
+      <bpmn:incoming>med_f2</bpmn:incoming>
+      <bpmn:outgoing>med_f3</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="med_t3" name="[MED 2] Disponibilizar definições aos processos">
+      <bpmn:incoming>med_f3</bpmn:incoming>
+      <bpmn:outgoing>med_f4</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="med_t4" name="[MED 3] Coletar dados do projeto">
+      <bpmn:incoming>med_f4</bpmn:incoming>
+      <bpmn:incoming>med_f8</bpmn:incoming>
+      <bpmn:incoming>med_f14</bpmn:incoming>
+      <bpmn:outgoing>med_f5</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="med_t5" name="[MED 3] Armazenar medidas e evidências">
+      <bpmn:incoming>med_f5</bpmn:incoming>
+      <bpmn:outgoing>med_f6</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:exclusiveGateway id="med_g1" name="Dados suficientes?">
+      <bpmn:incoming>med_f6</bpmn:incoming>
+      <bpmn:outgoing>med_f7</bpmn:outgoing>
+      <bpmn:outgoing>med_f8</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:task id="med_t6" name="[MED 4] Analisar medidas do projeto ou serviço">
+      <bpmn:incoming>med_f7</bpmn:incoming>
+      <bpmn:outgoing>med_f9</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="med_t7" name="[MED 4] Registrar e comunicar resultados">
+      <bpmn:incoming>med_f9</bpmn:incoming>
+      <bpmn:outgoing>med_f10</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:exclusiveGateway id="med_g2" name="Há desvio do objetivo?">
+      <bpmn:incoming>med_f10</bpmn:incoming>
+      <bpmn:outgoing>med_f11</bpmn:outgoing>
+      <bpmn:outgoing>med_f12</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:task id="med_t8" name="[MED 5] Definir ação corretiva">
+      <bpmn:incoming>med_f12</bpmn:incoming>
+      <bpmn:outgoing>med_f13</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="med_t9" name="[MED 5] Implementar e acompanhar ação">
+      <bpmn:incoming>med_f13</bpmn:incoming>
+      <bpmn:outgoing>med_f14</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:endEvent id="med_end" name="Medição registrada e comunicada">
+      <bpmn:incoming>med_f11</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="med_f1" name="" sourceRef="med_start" targetRef="med_t1">
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="med_f2" name="" sourceRef="med_t1" targetRef="med_t2">
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="med_f3" name="" sourceRef="med_t2" targetRef="med_t3">
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="med_f4" name="" sourceRef="med_t3" targetRef="med_t4">
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="med_f5" name="" sourceRef="med_t4" targetRef="med_t5">
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="med_f6" name="" sourceRef="med_t5" targetRef="med_g1">
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="med_f7" name="Sim" sourceRef="med_g1" targetRef="med_t6">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">Sim</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="med_f8" name="Não" sourceRef="med_g1" targetRef="med_t4">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">Não</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="med_f9" name="" sourceRef="med_t6" targetRef="med_t7">
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="med_f10" name="" sourceRef="med_t7" targetRef="med_g2">
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="med_f11" name="Não" sourceRef="med_g2" targetRef="med_end">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">Não</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="med_f12" name="Sim" sourceRef="med_g2" targetRef="med_t8">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">Sim</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="med_f13" name="" sourceRef="med_t8" targetRef="med_t9">
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="med_f14" name="" sourceRef="med_t9" targetRef="med_t4">
+    </bpmn:sequenceFlow>
+    <bpmn:textAnnotation id="med_note"><bpmn:text>Base atual: o Jira acompanha tarefas concluídas e pendentes, erros, integrações, testes, alterações no banco e status dos módulos; o GitHub organiza o projeto. A planilha registra que o restante ainda não é formalizado.</bpmn:text></bpmn:textAnnotation>
+    <bpmn:association id="assoc_med_note" sourceRef="med_t1" targetRef="med_note" associationDirection="One"/>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_Process_MED_Nivel_F">
+    <bpmndi:BPMNPlane id="BPMNPlane_Process_MED_Nivel_F" bpmnElement="Collaboration_Process_MED_Nivel_F">
+      <bpmndi:BPMNShape id="BPMNShape_participant_Process_MED_Nivel_F" bpmnElement="participant_Process_MED_Nivel_F" isHorizontal="true"><dc:Bounds x="80" y="100" width="2300" height="600"/></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_med_l1" bpmnElement="med_l1" isHorizontal="true"><dc:Bounds x="120" y="100" width="2300" height="150"/></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_med_l2" bpmnElement="med_l2" isHorizontal="true"><dc:Bounds x="120" y="250" width="2300" height="150"/></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_med_l3" bpmnElement="med_l3" isHorizontal="true"><dc:Bounds x="120" y="400" width="2300" height="150"/></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_med_l4" bpmnElement="med_l4" isHorizontal="true"><dc:Bounds x="120" y="550" width="2300" height="150"/></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_med_start" bpmnElement="med_start"><dc:Bounds x="160" y="157" width="36" height="36"/></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_med_t1" bpmnElement="med_t1"><dc:Bounds x="250" y="135" width="190" height="70"/></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_med_t2" bpmnElement="med_t2"><dc:Bounds x="500" y="285" width="190" height="70"/></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_med_t3" bpmnElement="med_t3"><dc:Bounds x="750" y="285" width="180" height="70"/></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_med_t4" bpmnElement="med_t4"><dc:Bounds x="990" y="435" width="170" height="70"/></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_med_t5" bpmnElement="med_t5"><dc:Bounds x="1210" y="435" width="180" height="70"/></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_med_g1" bpmnElement="med_g1"><dc:Bounds x="1440" y="445" width="50" height="50"/></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_med_t6" bpmnElement="med_t6"><dc:Bounds x="1560" y="285" width="190" height="70"/></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_med_t7" bpmnElement="med_t7"><dc:Bounds x="1800" y="285" width="180" height="70"/></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_med_g2" bpmnElement="med_g2"><dc:Bounds x="2010" y="145" width="50" height="50"/></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_med_t8" bpmnElement="med_t8"><dc:Bounds x="2110" y="585" width="170" height="70"/></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_med_t9" bpmnElement="med_t9"><dc:Bounds x="1920" y="435" width="180" height="70"/></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_med_end" bpmnElement="med_end"><dc:Bounds x="2220" y="157" width="36" height="36"/></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_med_note" bpmnElement="med_note"><dc:Bounds x="470" y="30" width="530" height="70"/></bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="BPMNEdge_med_f1" bpmnElement="med_f1"><di:waypoint x="196" y="175"/><di:waypoint x="250" y="170"/></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_med_f2" bpmnElement="med_f2"><di:waypoint x="440" y="170"/><di:waypoint x="470" y="170"/><di:waypoint x="470" y="320"/><di:waypoint x="500" y="320"/></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_med_f3" bpmnElement="med_f3"><di:waypoint x="690" y="320"/><di:waypoint x="750" y="320"/></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_med_f4" bpmnElement="med_f4"><di:waypoint x="930" y="320"/><di:waypoint x="960" y="320"/><di:waypoint x="960" y="470"/><di:waypoint x="990" y="470"/></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_med_f5" bpmnElement="med_f5"><di:waypoint x="1160" y="470"/><di:waypoint x="1210" y="470"/></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_med_f6" bpmnElement="med_f6"><di:waypoint x="1390" y="470"/><di:waypoint x="1440" y="470"/></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_med_f7" bpmnElement="med_f7"><di:waypoint x="1490" y="470"/><di:waypoint x="1520" y="470"/><di:waypoint x="1520" y="320"/><di:waypoint x="1560" y="320"/></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_med_f8" bpmnElement="med_f8"><di:waypoint x="1465" y="495"/><di:waypoint x="1465" y="650"/><di:waypoint x="1070" y="650"/><di:waypoint x="1070" y="505"/></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_med_f9" bpmnElement="med_f9"><di:waypoint x="1750" y="320"/><di:waypoint x="1800" y="320"/></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_med_f10" bpmnElement="med_f10"><di:waypoint x="1980" y="320"/><di:waypoint x="2040" y="320"/><di:waypoint x="2040" y="170"/></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_med_f11" bpmnElement="med_f11"><di:waypoint x="2060" y="170"/><di:waypoint x="2220" y="175"/></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_med_f12" bpmnElement="med_f12"><di:waypoint x="2035" y="195"/><di:waypoint x="2035" y="620"/><di:waypoint x="2110" y="620"/></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_med_f13" bpmnElement="med_f13"><di:waypoint x="2280" y="620"/><di:waypoint x="2300" y="620"/><di:waypoint x="2300" y="470"/><di:waypoint x="2100" y="470"/></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_med_f14" bpmnElement="med_f14"><di:waypoint x="1920" y="470"/><di:waypoint x="1870" y="470"/><di:waypoint x="1870" y="680"/><di:waypoint x="1070" y="680"/><di:waypoint x="1070" y="505"/></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_assoc_med_note" bpmnElement="assoc_med_note"><di:waypoint x="345" y="170"/><di:waypoint x="735" y="65"/></bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
